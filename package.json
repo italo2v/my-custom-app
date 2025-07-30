@@ -6,7 +6,7 @@
   "main": "dist-js/main.js",
   "homepage": "",
   "bugs": {
-    "url": "https://github.com/italo2v/custom-app",
+    "url": "https://github.com/italo2v/my-custom-app",
     "email": "italocruzicb@gmail.com"
   },
   "scripts": {
