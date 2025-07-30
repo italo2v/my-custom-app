@@ -7,7 +7,7 @@
   "homepage": "",
   "bugs": {
     "url": "https://github.com/italo2v/my-custom-app",
-    "email": "italocruzicb@gmail.com"
+    "email": "italo2v@gmail.com"
   },
   "scripts": {
     "start": "tsc | ./copyToDist.sh && electron-forge start",
@@ -22,7 +22,7 @@
   "keywords": [],
   "author": {
     "name": "Italo C. Brito",
-    "email": "italocruzicb@gmail.com"
+    "email": "italo2v@gmail.com"
   },
   "license": "MIT",
   "build": {
