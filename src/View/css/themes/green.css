@@ -1,0 +1,160 @@
+body {
+    color: #00563B;
+    background-color: #00563B;
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, input, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    color: #00563B;
+}
+
+a.btn.btn-primary, button.btn.btn-primary, a.btn.btn-primary span{
+    color: #71BC78;
+}
+a.btn.btn-primary, button.btn.btn-primary{
+    background-color: #043927;
+    border-color: #18453B;
+    color: #71BC78;
+}
+a.btn.btn-primary:hover, button.btn.btn-primary:hover{
+    background-color: #014421;
+    border-color: #18453B;
+    color: #71BC78;
+}
+a.btn.btn-primary:focus, button.btn.btn-primary:focus, #mainMenu button#title{
+    background-color: #00674b;
+    border-color: #18453B;
+    color: #71BC78;
+}
+a.sheetTab.active{
+    background-color: #00674b;
+    color: #71BC78;
+}
+a.sheetTab.active:hover{
+    background-color: #014421;
+    color: #71BC78;
+}
+a.sheetTab a.active:active {
+    background-color: #000524;
+    color: #71BC78;
+}
+a.sheetTab input.fieldNameTab {
+    color: #71BC78;
+}
+
+.slider{
+    background-color: #000524;
+}
+.box.panel{
+  color: #00563B;
+}
+.box .title input{
+  color: #00563B;
+}
+.box .title{
+  background-color: #006400;
+  color: #71BC78;
+}
+.profile{
+    border-color: #4FFFB0;
+}
+.hint{
+  background-color: #FFD;
+  border-color: #4FFFB0;
+}
+.panel.mainPanel, #mainMenu.panel, .box.panel, .reportTitle .title{
+  background-color: #61a953;
+  border-color: #4FFFB0;
+}
+table#sheet tr.bottom td.bottom, div#sheetTabs table.sheetTabs {
+    background-color: #61a953;
+}
+div#sheetTabs table.sheetTabs, div#sheetTabs table.sheetTabs tr, div#sheetTabs table.sheetTabs tr td{
+    border-top: 2px solid #00563B;
+}
+table#sheet, table#sheet tr, table#sheet tr td, table#sheet tr td.title.statsTitle, table#sheet tr td.null table#sheet tr td.lines,
+table#sheet tr td.bottomStats, table#sheet tr td.footLine, table#sheet tr td.rightStats{
+    border-color: #4FFFB0;
+}
+table#sheet td, table#sheet input, table#sheet select,
+table#sheet tr.odd_line #ballon.subValues td, table#sheet tr.odd_line #ballon.subValues input, table#sheet tr.odd_line #ballon.subValues select,
+table#sheet tr.highlight #ballon.subValues div.sheetField, table#sheet tr.highlight #ballon.subValues td, table#sheet tr.highlight #ballon.subValues td select{
+    background-color: #71BC78;
+}
+table#sheet tr.odd_line td, table#sheet tr.odd_line input, table#sheet tr.odd_line select,
+table#sheet tr.odd_line #ballon.subValues td.odd_line, table#sheet tr.odd_line #ballon.subValues td.odd_line input, table#sheet tr.odd_line #ballon.subValues td.odd_line select,
+table#sheet #ballon.subValues td.odd_line, table#sheet #ballon.subValues td.odd_line input, table#sheet #ballon.subValues td.odd_line select,
+table#sheet tr.highlight #ballon.subValues td.odd_line div.sheetField, table#sheet tr.highlight #ballon.subValues td.odd_line, table#sheet tr.highlight #ballon.subValues td.odd_line select{
+    background-color: #ACE1AF;
+}
+table#sheet .title, table#sheet tr.odd_line td.title, table#sheet #ballon.subValues td.title, table#sheet tr.odd_line #ballon.subValues td.title, table#sheet tr.highlight #ballon.subValues td.title{
+ color: #71BC78;
+ background-color:#004526;
+}
+table#sheet td.title.titleSorted, table#sheet tr.odd_line td.title.titleSorted, table#sheet .titleSorted .title{
+  background-color:#006400;
+}
+table#sheet #ballon.subValues .sheetField:disabled, #sheet #ballon.subValues td.odd_line .sheetField:disabled{
+    background-color: #c7c7c7;
+}
+table#sheet tr td.lines, table#sheet tr td.null{
+    background-color:#c7c7c7;
+    border-right-color: #777;
+    border-bottom-color: #777;
+    color: #777;
+}
+table#sheet #rightStats, table#sheet #bottomStats td{
+    background-color: #c7c7c7;
+    border-color: #999;
+}
+table#sheet tr td.lines:hover, table#sheet td#rightStats:hover, table#sheet #bottomStats td:hover{
+    background-color: #a7a7a7;
+}
+table#sheet tr.highlight td .sheetField, table#sheet tr.highlight td, table#sheet tr.highlight td div.sheetField input, table#sheet tr.highlight td div.sheetField select,
+table#sheet tr.highlight td div.sheetField textarea{
+    background-color: #ff9;
+}
+
+#ballon, #ballon textarea{
+    background-color: #fff65b;
+}
+.ballonArrow{
+    color: #fff65b;
+}
+
+#ballon.subValues {
+    background-color: #355E3B;
+}
+.ballonArrow.subValues{
+    color: #355E3B;
+}
+
+#ballon.preview{
+    border-color: #333;
+    background-color: #71BC78;
+}
+#ballon.preview tr.odd, #ballon.preview tr.odd input{
+    background-color: #ACE1AF;
+}
+
+#ballon.preview table tr td{
+    border-color: #4FFFB0;
+}
+
+.submenuArrow{
+    color: #999;
+}
+
+.commentDot{
+    border-color: #4FFFB0;
+    background-color: #fff65b;
+}
+
+.transactionDot{
+    border-color: #4FFFB0;
+    background-color: #333;
+}
+
+#selectors .label, #selectors .label span, #selectors .title{
+    color: #71BC78;
+    background-color:#004526;
+    border-color: #4FFFB0;
+}

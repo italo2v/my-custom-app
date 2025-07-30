@@ -1,0 +1,81 @@
+body, #ballon{
+    font-size: 10px;
+}
+table#sheet tr td input, table#sheet tr td select, table#sheet div.sheetField, table#sheet div.sheetField input, table#sheet div.sheetField select{
+    line-height: 14px;
+}
+
+table#sheet tr td span.number, span.description{
+    font-size: 8px;
+    height: 11px;
+    line-height: 11px;
+}
+
+div.title, .box .title, table#sheet .title, table#sheet td.rightStats, table#sheet td.bottomStats, table#sheet td.footLine, table#sheet td.title.statsTitle{
+    font-size: 12px;
+    line-height: 12px;
+}
+a.btn, button.btn, .dropdown-menu{
+    font-size: 10px;
+}
+
+table#sheet tr td input, table#sheet tr td select, table#sheet div.sheetField, table#sheet div.sheetField input, table#sheet div.sheetField select, table#sheet td.title {
+    min-width: 35px;
+    height: 20px;
+}
+
+#mainMenu.panel{
+    height: 40px;
+}
+table#sheet div.sheetField.text.first, table#sheet div.sheetField.select.first, table#sheet div.sheetField.lettersAndNumbers.first{
+    min-width: 150px;
+}
+table#sheet tr, table#sheet tr td, table#sheet tr td.lines, table#sheet tr td.null{
+    min-width: 20px;
+    height: 20px;
+}
+table#sheet tr td#rightStats{
+    width: 10px;
+    min-width: 10px;
+}
+table#sheet div.sheetField.date{
+    width: 65px;
+}
+
+table#sheet div.sheetField {
+    max-width: 150px;
+}
+table#sheet div.sheetField div.value{
+    height: 20px;
+}
+
+div#sheetTabs {
+    height: calc(100% - 45px);
+}
+div#sheetTabs div#spreadSheet {
+    height: calc(100% - 55px);
+}
+#ballon textarea{
+    width: 250px;
+    height: 250px;
+}
+.box .title{
+  height: 16px;
+}
+.box .title input {
+    width: 12px;
+    height: 12px;
+}
+.box.panel {
+    width: 250px;
+}
+.box .title, .box .message{
+    width: 244px;
+}
+a.downloadLink img{
+    width: 14px;
+    height: 14px;
+}
+.transactionDot, .commentDot{
+    top: 13px;
+}

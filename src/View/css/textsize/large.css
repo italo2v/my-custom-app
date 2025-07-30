@@ -1,0 +1,87 @@
+body{
+    font-size: 28px;
+}
+table#sheet tr td input, table#sheet tr td select, table#sheet div.sheetField, table#sheet div.sheetField input, table#sheet div.sheetField select{
+    line-height: 32px;
+}
+
+table#sheet tr td span.number, span.description{
+    font-size: 16px;
+    height: 11px;
+    line-height: 11px;
+}
+
+div.title, .box .title, table#sheet .title, table#sheet td.rightStats, table#sheet td.bottomStats, table#sheet td.footLine, table#sheet td.title.statsTitle{
+    font-size: 32px;
+    line-height: 32px;
+}
+a.btn, button.btn, .dropdown-menu, #ballon{
+    font-size: 24px;
+}
+
+table#sheet tr td input, table#sheet tr td select, table#sheet div.sheetField, table#sheet div.sheetField input, table#sheet div.sheetField select, table#sheet td.title, table#sheet div.sheetField.markets {
+    min-width: 100px;
+    height: 40px;
+}
+
+#mainMenu.panel{
+    height: 60px;
+}
+
+table#sheet div.sheetField.text.first, table#sheet div.sheetField.select.first, table#sheet div.sheetField.lettersAndNumbers.first{
+    min-width: 400px;
+}
+table#sheet tr td.lines, table#sheet tr td.null{
+    min-width: 42px;
+    height: 42px;
+}
+
+table#sheet div.sheetField.date, table#sheet div.sheetField.date input{
+    width: 160px;
+}
+
+table#sheet div.sheetField {
+    max-width: 400px;
+}
+table#sheet div.sheetField div.value, table#sheet div.sheetField input{
+    max-width: 400px;
+    height: 40px;
+    width: unset;
+}
+
+div#sheetTabs {
+    height: calc(100% - 120px);
+}
+div#sheetTabs div#spreadSheet {
+    height: calc(100% - 95px);
+}
+#ballon textarea{
+    width: 600px;
+    height: 400px;
+}
+.box .title{
+  height: 40px;
+}
+.box .title input {
+    width: 36px;
+    height: 36px;
+}
+.box.panel {
+    width: 500px;
+}
+.box .title, .box .message{
+    width: 494px;
+}
+a.downloadLink img{
+    width: 30px;
+    height: 30px;
+}
+table.reportTable tr td.reportTitle{
+    width: 400px;
+}
+#selectors #endMonth, #selectors #startMonth{
+    width: 120px;
+}
+.transactionDot, .commentDot{
+    top: 32px;
+}

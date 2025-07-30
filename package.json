@@ -1,0 +1,117 @@
+{
+  "name": "My Finances",
+  "productName": "my-custom-app",
+  "version": "1.0.0",
+  "description": "It was never so easy to create your own program to manage your data! Why use custom app? In a simple, fast and intuitive way you enhance your data management productivity and create your own reports!",
+  "main": "dist-js/main.js",
+  "homepage": "",
+  "bugs": {
+    "url": "https://github.com/italo2v/custom-app",
+    "email": "italocruzicb@gmail.com"
+  },
+  "scripts": {
+    "start": "tsc | ./copyToDist.sh && electron-forge start",
+    "package": "tsc | ./copyToDist.sh && electron-forge package",
+    "make": "tsc | ./copyToDist.sh && electron-forge make",
+    "make-builder": "tsc | ./copyToDist.sh && electron-builder --prepackaged ./out/my-finances-linux-x64 --linux",
+    "build": "tsc | ./copyToDist.sh && electron-builder --win --x64 --linux",
+    "build-all": "tsc | ./copyToDist.sh && electron-forge make && electron-builder --prepackaged ./out/my-finances-linux-x64 --linux && electron-builder --win --x64",
+    "publish": "electron-forge publish"
+  },
+  "postinstall": "electron-builder install-app-deps",
+  "keywords": [],
+  "author": {
+    "name": "Italo C. Brito",
+    "email": "italocruzicb@gmail.com"
+  },
+  "license": "MIT",
+  "build": {
+    "directories": {
+      "output": "out/"
+    },
+    "appId": "com.my-finances",
+    "asar": true,
+    "productName": "my-finances",
+    "linux": {
+      "category": "Office",
+      "files": [
+        "**/*",
+        "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+        "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+        "!**/node_modules/*.d.ts",
+        "!**/node_modules/.bin",
+        "!**/src/*",
+        "!**/docs/*",
+        "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+        "!.editorconfig",
+        "!**/._*",
+        "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+        "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+        "!**/{appveyor.yml,.travis.yml,circle.yml}",
+        "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+        {
+          "from": "./node_modules/call-bind-apply-helpers/",
+          "to": "node_modules/call-bind-apply-helpers/",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "signtoolOptions": {
+        "certificateFile": "/media/SSD2/Development/selfsigncert.pfx",
+        "certificatePassword": "M1F1N4NC3S"
+      },
+      "files": [
+        "**/*",
+        "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+        "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+        "!**/node_modules/*.d.ts",
+        "!**/node_modules/.bin",
+        "!**/src/*",
+        "!**/docs/*",
+        "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+        "!.editorconfig",
+        "!**/._*",
+        "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+        "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+        "!**/{appveyor.yml,.travis.yml,circle.yml}",
+        "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}",
+        {
+          "from": "./node_modules/call-bind-apply-helpers/",
+          "to": "node_modules/call-bind-apply-helpers/",
+          "filter": [
+            "**/*"
+          ]
+        }
+      ]
+    }
+  },
+  "dependencies": {
+    "@cubejs-client/core": "^0.31.0",
+    "bootstrap": "^5.3.7",
+    "call-bind-apply-helpers": "^1.0.2",
+    "chart.js": "^4.0.0",
+    "html2canvas": "^1.4.1",
+    "image-to-pdf": "^2.0.0",
+    "jszip": "^3.10.1",
+    "setimmediate": "^1.0.5",
+    "utils": "^0.2.2"
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.7.0",
+    "@electron-forge/maker-deb": "^7.7.0",
+    "@electron-forge/maker-rpm": "^7.7.0",
+    "@electron-forge/maker-squirrel": "^7.8.1",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.7.0",
+    "@electron-forge/plugin-fuses": "^7.7.0",
+    "@electron/fuses": "^1.8.0",
+    "@electron/packager": "^18.3.6",
+    "@types/jquery": "^3.5.32",
+    "@types/jqueryui": "^1.12.24",
+    "electron": "35.0.3",
+    "electron-builder": "^25.1.8",
+    "typescript": "^5.8.3"
+  }
+}

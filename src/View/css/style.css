@@ -1,0 +1,585 @@
+body {
+    font-family: helvetica neue,Helvetica,Arial,sans-serif;
+    /*font-size: 16px;
+    line-height: 20px;
+    font-weight: 400;*/
+}
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, input, blockquote, pre, a, abbr, acronym, address, code, del, dfn, em, img, q, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    font-size: 100%;
+    font-family: inherit;
+    vertical-align: baseline;
+}
+textarea {
+    border: 1px solid;
+    margin: 0;
+    padding: 1px;
+}
+ul, ol {
+    list-style-position: inside;
+    margin: 0 0 18px;
+}
+.dropdown-inline {
+    display: inline-block;
+    position: relative;
+}
+.panel .pull-left table, .panel .pull-left input{
+  margin: 1px;
+  padding: 1px;
+}
+
+.smallest{
+  width: 15px;
+}
+.small{
+  width: 35px;
+}
+.medium{
+  width: 60px;
+}
+.right{
+  float: right;
+}
+.left{
+  float: left;
+}
+.center{
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+div.title{
+    font-weight: bold;
+    /*font-size: 24px;*/
+}
+/*span.description{
+    font-size: 10px;
+}*/
+
+#boxProfile span{
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#boxProfile input[type=text], #boxProfile input[type=password]{
+  width: 100px;
+}
+
+.box.panel{
+  z-index: 1001;
+  position: absolute;
+  /*width: 400px;*/
+  min-height: 150px;
+  padding: 0;
+  margin:0;
+  display:grid;
+  border-width:3px;
+}
+.box .title{
+  /*font-size: 18px;
+  height: 28px;*/
+  font-weight: bold;
+  margin: 2px;
+  padding: 2px;
+}
+/*.box .title input {
+    width: 24px;
+    height: 24px;
+}*/
+.box .message{
+  text-align:center;
+  vertical-align: middle;
+  margin: 5px;
+  padding: 2px;
+}
+#lock{
+  top:0px;
+  left:0px;
+  width:100%;
+  height:100%;
+  z-index: 999;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5)
+}
+.profile{
+    background-size: 32px 32px;
+    border: 1px solid;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin: 0;
+    position: relative;
+    height: 32px;
+    width: 32px;
+}
+.changePic {
+    background-image: url('../pictures/change_pic.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    height: 32px;
+    width: 32px;
+    opacity: .8;
+    position:absolute;
+}
+.hint{
+  padding:5px;
+  margin: 5px;
+  border: 1px solid;
+  text-align:center;
+}
+#systemLanguage ul{
+  max-height:200px;
+  overflow-y:auto;
+}
+.google{
+  background-image: url('../pictures/socials.png');
+  background-position: 0 -61px;
+  cursor:pointer;
+  width: 68px;
+  height: 74px;
+  display: inline-block;
+}
+
+.panel.mainPanel {
+    margin-bottom: 0px;
+}
+
+.panel{
+  margin: 15px 15px 0 15px;
+  padding: 5px;
+  border: 1px solid;
+}
+
+#mainMenu .btn {
+    margin-right: 10px;
+}
+
+#mainMenu.panel {
+    text-align: center;
+}
+
+#mainMenu #title{
+    position: absolute;
+    opacity: 1;
+    cursor: default;
+}
+
+#mainMenu input, .panel .pull-left input{
+  margin: 5px;
+  position: relative;
+}
+
+.mainPanel{
+    margin-top:10px;
+    margin-bottom:0px;
+    display: block;
+    text-align: center;
+    overflow: auto;
+    height: 100%;
+}
+
+.mainPanel a.active {
+    font-weight:bold;
+}
+
+#reportPanel span.newColors, #reportPanel span.groupBy{
+    margin-left: 20px;
+}
+#reportPanel input{
+    border: 1px solid;
+    text-align: center;
+}
+#reportPanel span.selectors{
+    margin: 5px;
+    padding: 2px;
+    display: inline-block;
+}
+
+table.reportTable {
+    background-color: #FFF;
+    border: 1px solid #333;
+}
+table.reportTable tr td{
+    text-align: center;
+    color: #333;
+    margin: 5px;
+    padding: 5px;
+    height: 30px;
+}
+table.reportTable .reportTitle{
+    border-bottom: 2px solid #333;
+}
+div#sheetTabs div#spreadSheet {
+    overflow-y: auto;
+}
+
+div#sheetTabs table.sheetTabs{
+    width: calc(100% - 80px);
+    text-align: center;
+    z-index: 0;
+    position:absolute;
+}
+
+a.sheetTab, a.addSheetTab{
+    margin-top:15px;
+    margin-right: 15px;
+}
+
+input.fieldNameTab {
+    text-align:center;
+}
+
+table {
+    max-width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-left:10px;
+    margin-right:10px;
+}
+table, td, th {
+    vertical-align: middle;
+}
+
+table#sheet .title{
+ /*font-size: 14px;*/
+ font-weight: bold;
+ cursor: pointer;
+}
+
+table#sheet tr td.bottom{
+    border: 0px;
+    margin-top: 30px;
+    padding:15px;
+    vertical-align: top;
+}
+
+table#sheet tr td.lines, table#sheet tr td.null{
+    /*min-width: 30px;*/
+    border-top: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid;
+    border-bottom: 1px solid;
+}
+
+table#sheet tr td.lines:hover{
+    cursor:pointer;
+}
+
+table#sheet tr td{
+    border: 1px solid;
+    padding: 0;
+    text-align: center;
+    text-transform: uppercase;
+    cursor: default;
+    position: relative;
+    height: 30px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+table#sheet tr td span.number {
+    position: absolute;
+    top: 0px;
+    left: 1px;
+    /*font-size: 9px;
+    height: 11px;
+    line-height: 11px;*/
+}
+table#sheet tr td input, table#sheet tr td select {
+    font-family: helvetica neue,Helvetica,Arial,sans-serif;
+    /*font-size: 12px;
+    line-height: 28px;
+    width: 50px;*/
+    height: 100%;
+    text-align: center;
+    padding: 2px;
+    text-transform: uppercase;
+}
+
+table#sheet div.sheetField.markets{
+    width:100px;
+}
+
+table#sheet #ballon.subValues div.sheetField{
+    min-width: 100px;
+}
+
+table#sheet div.sheetField, table#sheet div.sheetField input, table#sheet div.sheetField select{
+    /*font-size: 14px;
+    height: 28px;*/
+    cursor: text;
+    text-align: center;
+    height:100%;
+    width: 100%;
+}
+table#sheet div.sheetField.disabled, table#sheet tr.highlight div.sheetField.disabled, table#sheet tr.highlight #ballon.subValues div.sheetField.disabled{
+    background-color: #c9c9c9;
+}
+
+/*table#sheet td.title {
+    min-width: 50px;
+}*/
+
+table#sheet div.value{
+    padding-right: 5px;
+    padding-left: 5px;
+    padding-top: 4px;
+    height:100%;
+    width: 100%;
+    word-break: break-word;
+}
+
+table#sheet textarea.sheetFieldFocused{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 998;
+    width: 200px;
+    height: 100px;
+    word-break: break-word;
+}
+table#sheet div.sheetField.text, table#sheet div.sheetField.lettersAndNumbers, table#sheet div.sheetField.select{
+    min-width: 100px;
+}
+
+/*table#sheet div.sheetField.text.first, table#sheet div.sheetField.select.first, table#sheet div.sheetField.lettersAndNumbers.first{
+    min-width: 300px;
+}*/
+table#sheet div.sheetField.Integer, table#sheet div.sheetField.Float, table#sheet div.sheetField.moneyMask{
+    white-space: nowrap;
+}
+
+table#sheet .statsTitle, table#sheet tr.bottomStats{
+    cursor: default;
+}
+table#sheet #rightStats{
+    width: 10px;
+    cursor: pointer;
+}
+table#sheet #bottomStats, table#sheet #bottomStats td{
+    height: 10px;
+    line-height: 10px;
+    cursor: pointer;
+}
+table#sheet #rightStats .arrow{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-left: 4px dashed;
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+}
+table#sheet #bottomStats .arrow{
+    display: inline-block;
+    width: 0;
+    height: 0;
+    vertical-align: middle;
+    border-top: 4px dashed;
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+}
+table#sheet td.rightStats, table#sheet td.bottomStats, table#sheet td.footLine, table#sheet td.title.statsTitle{
+    border: 2px solid;
+    font-style: italic;
+    /*font-size: 12px;*/
+    cursor: default;
+}
+
+table#sheet #ballon .title{
+    cursor: default;
+}
+
+table#sheet td.title.statsTitle{
+    border-top: 1px solid;
+}
+
+#ballon{
+    position:absolute;
+    z-index:998;
+    min-width:160px;
+    padding:1px 0;
+    margin:2px 0 0;
+    /*font-size:14px;*/
+    text-align:left;
+    display:block;
+    top:0px;
+    margin-left:10px;
+ list-style:none;-webkit-background-clip:padding-box;background-clip:padding-box;
+ border-radius:4px;-webkit-box-shadow:0 6px 12px rgba(0,0,0,.175);box-shadow:0 6px 12px rgba(0,0,0,.175);
+  }
+
+#ballon.subValues{
+    z-index: 1000;
+    text-align: center;
+    padding: 5px;
+}
+
+.ballonArrow.subValues{
+    z-index: 1000;
+}
+
+#ballon.subValues button.btn.btn-primary {
+    margin: 5px;
+}
+
+#ballon textarea{
+    border: 0px;
+    margin-left:3px;
+    /*width: 300px;
+    height: 300px;*/
+}
+
+#ballon.preview{
+    position: absolute;
+    display: block;
+    border: 1px solid;
+    max-width: 300px;
+    z-index: 998;
+    padding: 2px;
+}
+
+#ballon.preview input{
+    width: 100px;
+}
+
+#ballon.preview table tr td{
+    border: 1px solid;
+}
+
+.ballonArrow{
+    z-index:998;
+    position:absolute;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid;
+    top:3px;
+}
+
+.submenuArrow{
+    z-index: 998;
+    position: absolute;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left: 10px solid;
+}
+
+.commentDot{
+    z-index: 997;
+    position: absolute;
+    cursor: pointer;
+    top: 21px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid;
+}
+
+.transactionDot{
+    z-index: 997;
+    position: absolute;
+    cursor: pointer;
+    left: 1px;
+    width: 7px;
+    height: 7px;
+    border: 1px solid;
+}
+
+div.rightClickMenu{
+    position:absolute;
+    display:block;
+}
+
+div.rightClickMenu .dropdown-menu, .rightClickSubMenu .dropdown-menu{
+    display:block;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 33px;
+  height: 15px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 4px;
+  top: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+/*input:checked + .slider {
+  background-color: #2196F3;
+}*/
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+#selectors .label{
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid;
+}
+#selectors .label .title{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+div#tabSelectors{
+    margin: 5px;
+}
+
+#reportPanel canvas#graph, #reportPanel #printImage{
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#reportTitle.title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
