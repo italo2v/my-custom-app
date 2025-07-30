@@ -1,0 +1,1 @@
+A simple app that you can create your own Electron App to manage your data like a spreadsheet (focusing on fast management and enhance productivity) and create your own reports and charts in a simple, fast and intuitive way! Open docs/documentation.html for more information.
