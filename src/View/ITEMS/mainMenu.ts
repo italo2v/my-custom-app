@@ -11,12 +11,14 @@ interface DropdownItem {
 	id: string;
 	text: string;
 	menuTitle?: string;
+	title?: string;
 	function: ()=>void;
 }
 interface DropdownSubMenu {
 	submenu: boolean;
 	text: string;
 	items: Array<DropdownItem>;
+	title?: string;
 }
 interface MenuItem {
 	id?: string;
@@ -38,7 +40,7 @@ module.exports = {
 		$('#mainMenu').remove()
 	  $('<div/>', {'id': 'mainMenu', 'class': 'panel'}).appendTo($body)
 	  $('<button/>', {'id': 'title', 'class': 'btn btn-warning', 'style': 'top: 21px'}).appendTo('#mainMenu').attr('disabled', 'disabled')
-	  
+
 	  var ids: string[] = []
 	  var subMenu = 0
 	  $(module.exports.menuItems).each(function(i: number, item: MenuItem){
