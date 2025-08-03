@@ -83,7 +83,7 @@ function insertButtonMenu(item: MenuItem){
   	$button.attr('title', item.title)
   if(typeof item.menuTitle === 'string')
 		$button.attr("data-title", dataLanguage(item.menuTitle)).on("click", updateTitle)
-  if(typeof item.function === 'function')
+  if(typeof item.function === 'function')//@ts-ignore
 		$button.on("click", item.function)
   if(item.pos !== undefined)
     $button.addClass('pull-'+item.pos)

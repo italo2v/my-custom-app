@@ -16,7 +16,7 @@ interface ShortKeys {
 }
 interface ShortKey {
 	id: string;
-	dropdown: boolean;
+	dropdown?: boolean;
 }
 
 var closeBoxTimeout: NodeJS.Timeout
@@ -236,7 +236,7 @@ module.exports = {
 										if(!event.shiftKey && key.length === 1)
 											key = key.toLowerCase()
 										if(event.key === key){
-											if(shortKeyItem.dropdown)
+											if(shortKeyItem.dropdown) //@ts-ignore
 							    			$('#'+shortKeyItem.id).children('a').trigger("click").parent().children('ul').children('li').off('keydown.dropdownMenu').on('keydown.dropdownMenu', navigationMenu)
 							    		else
 							    			$('#'+shortKeyItem.id).trigger("click")
@@ -283,9 +283,9 @@ $(document).on("keydown", (event)=>{
   }else if(event.ctrlKey && key === 'a' && !event.altKey){ // ctrl+a open about
     event.preventDefault();
     $('#about').trigger("click")
-  }else if(event.ctrlKey && event.altKey && key === 'c'){ // ctrl+alt+c configuration menu
+  }else if(event.ctrlKey && event.altKey && key === 'c'){ // @ts-ignore ctrl+alt+c configuration menu
     $('#systemConfig').children('a').trigger("click").parent().children('ul').children('li').off('keydown.dropdownMenu').on('keydown.dropdownMenu', navigationMenu)
-  }else if(event.ctrlKey && event.altKey && key === 'l'){ // ctrl+alt+l language menu
+  }else if(event.ctrlKey && event.altKey && key === 'l'){ // @ts-ignore ctrl+alt+l language menu @ts-ignore
     $('#systemLanguage').children('a').trigger("click").parent().children('ul').children('li').off('keydown.dropdownMenu').on('keydown.dropdownMenu', navigationMenu)
   }else if(event.ctrlKey && key === 'u'){ // ctrl+u update
     var $update = $('#update')
@@ -308,7 +308,7 @@ $(document).on("keydown", (event)=>{
   //alert(key)
 })
 
-function navigationMenu(event){
+function navigationMenu(this: HTMLLIElement, event: KeyboardEvent){
   if(event.key === 'Enter' || event.key === 'ArrowRight'){
   	var opensubMenu = $(this).children('a').children('div.dropdown.dropdown-inline')
   	if($(this).children('a').children('span.submenuArrow').length > 0){
@@ -323,12 +323,12 @@ function navigationMenu(event){
 	  				$(this).hide()
 	  			}
 	  			if(event.key === 'Enter'){
-	  				$(document.activeElement).click()
+	  				$(document.activeElement||this).click()
 	  				$(this).parent().parent().parent().parent().click()
 	  				$(this).hide()
 	  			}
 					if(event.key === 'ArrowUp' || event.keyCode === 38 || event.key === 'ArrowDown' || event.keyCode === 40){
-				  	var activeID:string = $(document.activeElement).attr('id')
+				  	var activeID:string = $(document.activeElement||this).attr('id')||''
 				  	$(this).children('ul').children('li').each( (i:number, li:HTMLElement)=>{
 				  		if($(li).children('a').attr('id') === activeID){
 				  			if(i < $(this).children('ul').children('li').length && (event.key === 'ArrowDown' || event.keyCode === 40))
@@ -348,7 +348,7 @@ function navigationMenu(event){
     }
   }
 	if(event.key === 'ArrowUp' || event.keyCode === 38 || event.key === 'ArrowDown' || event.keyCode === 40){
-  	var activeA:string = $(document.activeElement).attr('item')
+  	var activeA:string = $(document.activeElement||this).attr('item')||''
   	$(this).parent().children('li').each( (i:number, li:HTMLElement)=>{
   		if($(li).children('a').attr('item') === activeA){
   			if(i < $(this).parent().children('li').length && (event.key === 'ArrowDown' || event.keyCode === 40))

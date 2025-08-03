@@ -73,6 +73,28 @@ interface ReportData {
   selector: SelectorData;
   type:string;
 }
+interface Stock {
+	market: string;
+	ticker: string;
+	data?: StockMonthPrice[];
+}
+interface StockIndex extends Stock {
+	index: number;
+}
+interface StockMonthPrice {
+	month: number;
+	year: number;
+	price: number|null;
+}
+type StockTransaction = "B" | "S" | "BS" | "IN" | "SP"
+interface StockTransactions {
+	transaction: StockTransaction;
+	option?: string;
+	dateISO: string;
+	quantity: number|string;
+	price?: number|string;
+	costs?: number|string;
+}
 
 module.exports = {
   systemConfig: {},
@@ -299,7 +321,7 @@ module.exports = {
               if(col.length > 0 && col[0].value !== undefined && col[col.length-1]._id !== undefined)
                 items[year][tab].push({'value': col[0].value?.toString()||'', '_id': col[col.length-1]._id?.toString()||''})
             })
-          })    
+          })
         })
       }
       callback(items)
@@ -644,7 +666,7 @@ module.exports = {
       if(file.name.split('.')[file.name.split('.').length-1] === 'json'){
         const path = `${module.exports.systemConfig.userDataPath}/${file.name}`
 
-        if (fs.statSync(path).isFile()) 
+        if (fs.statSync(path).isFile())
           zip.file(file.name, fs.readFileSync(path, "utf-8"))
       }
     })

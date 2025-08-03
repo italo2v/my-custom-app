@@ -601,7 +601,7 @@ function getChartJSDataSets(selector:SelectorDB, data:Array<SheetCell[]>, labels
 	var last_total:number = -1
 	var dsColors: {[tabName:string]: string} = {}
 	var dsNumber:number = 1
-	Object.keys(module.exports.yearsTabs).forEach( dataSet=>{
+	Object.keys(module.exports.yearsTabs).forEach( (dataSet:string)=>{
 		if(selector.groupData === 'dataSets'){
 			if(typeof dsColors[dataSet] === 'undefined'){
 				if(module.exports.backgroundColors[dsNumber])
@@ -611,8 +611,8 @@ function getChartJSDataSets(selector:SelectorDB, data:Array<SheetCell[]>, labels
 				dsNumber++
 			}
 		}else if(selector.groupData === 'tabs')
-			Object.keys(module.exports.yearsTabs[dataSet]).forEach( year=>{
-				module.exports.yearsTabs[dataSet][year].forEach( tabName=>{
+			Object.keys(module.exports.yearsTabs[dataSet]).forEach( (year:string)=>{
+				module.exports.yearsTabs[dataSet][year].forEach( (tabName:string)=>{
 					if(typeof dsColors[tabName] === 'undefined'){
 						if(module.exports.backgroundColors[dsNumber])
 							dsColors[tabName] = module.exports.backgroundColors[dsNumber]
@@ -877,7 +877,7 @@ function showTable(table: ReportTableRow[]){
 	})
 	$printImage.width( ($($table_html).width()||500) +25)
 }
-
+//@ts-ignore
 window.getLastMonth = function(data:Array<SheetCell[]>){
 	if(Array.isArray(data) && data.length > 0){
 		var last_total:number = 1
@@ -897,7 +897,7 @@ window.getLastMonth = function(data:Array<SheetCell[]>){
 	}
 	return data
 }
-
+//@ts-ignore
 window.getRemainderDataSet = function(data:Array<SheetCell[]>){
 	if(Array.isArray(data) && data.length > 0){
 		var rowTotalRemainder:SheetCell[] = [{value: dataLanguage('remainder')}]
@@ -936,7 +936,7 @@ window.getRemainderDataSet = function(data:Array<SheetCell[]>){
 	}
 	return data
 }
-
+//@ts-ignore
 window.getLastYearQty = function (data:Array<SheetCell[]>){
 	var newData:Array<SheetCell[]> = []
 	if(Array.isArray(data) && data.length > 0){

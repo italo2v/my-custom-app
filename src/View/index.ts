@@ -54,7 +54,6 @@ function dataLanguage(key: string): string{
 }
 
 window.onload = () => {
-  
   $('<div>', {'id': 'lock'}).hide().appendTo($body)
 
   /*ipcRenderer.on('check-savedata', (event: IpcRendererEvent)=>{

@@ -6,6 +6,7 @@ const subValues: SubValues = require('./subValues.js')
 const rightClickMenu: RightClickMenu = require('./rightClickMenu.js')
 
 interface Sheet {
+  sheetField: SheetField;
   dataSet: SheetDataSet;
   rowTitle: RowTitle[];
   footLines: SheetFootLine[];
