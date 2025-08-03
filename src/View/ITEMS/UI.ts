@@ -285,7 +285,7 @@ $(document).on("keydown", (event)=>{
     $('#about').trigger("click")
   }else if(event.ctrlKey && event.altKey && key === 'c'){ // @ts-ignore ctrl+alt+c configuration menu
     $('#systemConfig').children('a').trigger("click").parent().children('ul').children('li').off('keydown.dropdownMenu').on('keydown.dropdownMenu', navigationMenu)
-  }else if(event.ctrlKey && event.altKey && key === 'l'){ // @ts-ignore ctrl+alt+l language menu @ts-ignore
+  }else if(event.ctrlKey && event.altKey && key === 'l'){ // @ts-ignore ctrl+alt+l language menu
     $('#systemLanguage').children('a').trigger("click").parent().children('ul').children('li').off('keydown.dropdownMenu').on('keydown.dropdownMenu', navigationMenu)
   }else if(event.ctrlKey && key === 'u'){ // ctrl+u update
     var $update = $('#update')
