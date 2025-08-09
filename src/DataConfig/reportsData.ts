@@ -48,7 +48,7 @@ module.exports = {
 		}
 	},
 	annualPosition: {
-		title: 'annualposition', showSelectors: ['year'], type: 'table', dataOperations: 'getLastYearQty', selectorDataSets: {
+		title: 'annualposition', showSelectors: ['year'], type: 'table', selectorDataSets: {
 			showTotal: true,
 			groupData: 'firstValue',
 			dataSets: [
@@ -56,6 +56,6 @@ module.exports = {
 				{title: 'fixedincome', dataID: 'fixedInvestments', showTabs: ['{all}']},
 				{title: 'investmentfunds', dataID: 'funds', showTabs: ['{all}']}
 			]
-		}, period: {startDate: '12-{year--}', endDate: '1-{year}'}
+		}, period: {startDate: '1-{year}', endDate: '1-{year}'}
 	},
 }

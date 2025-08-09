@@ -936,26 +936,6 @@ window.getRemainderDataSet = function(data:Array<SheetCell[]>){
 	}
 	return data
 }
-//@ts-ignore
-window.getLastYearQty = function (data:Array<SheetCell[]>){
-	var newData:Array<SheetCell[]> = []
-	if(Array.isArray(data) && data.length > 0){
-		data.forEach( (row:SheetCell[], i:number)=>{
-			if(row.length >= 3 && row[1].preview && row[2].preview && row[1].preview.quantity && row[2].preview.price){
-				var value:number = row[1].preview.quantity*row[2].preview.price
-				var row_config = structuredClone(row[row.length-1])
-				row.splice(1, row.length-1)
-				row.push({value: value})
-				row.push(row_config)
-				newData.push(row)
-			}else if(row.length >= 3 && row[2].value && (typeof row[2].value === 'number' || Number.isFinite(parseFloat(row[2].value)))){
-				row.splice(1, 1)
-				newData.push(row)
-			}
-		})
-	}
-	return newData
-}
 
 async function showDownload(filename: string, orientation: string){
 	let $printImage = $('#printImage')
