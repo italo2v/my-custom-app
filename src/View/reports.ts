@@ -9,7 +9,7 @@ const imgToPDF = require('image-to-pdf')
 const { createWriteStream } = require('fs')
 //const { alertBox }: UI = require('./ITEMS/UI.js')
 const mySheet: Sheet = require('./ITEMS/sheet.js')
-const reportsData: ConfigReport = require('../DataConfig/reportsData.js')
+const reportData: ConfigReport = require('../DataConfig/reportData.js')
 //@ts-ignore
 const { createField }: SheetField = require('./ITEMS/sheetField.js')
 var mousePosX = 0
@@ -99,16 +99,16 @@ module.exports = {
 		$('<div>', {'id': 'reportTitle', 'class': 'title'}).appendTo($printImage)
   	$('<div>', {'id': 'reportArea'}).appendTo($printImage)
 
-  	var reportsID:string[] = Object.keys(reportsData)
+  	var reportsID:string[] = Object.keys(reportData)
   	if(reportsID.indexOf(reportID) === -1){
   		alertBox(dataLanguage('unregisteredreport'))
   		$('#reportPanel').remove()
   	}
 
-  	var reportIDs: string[] = Object.keys(reportsData)
+  	var reportIDs: string[] = Object.keys(reportData)
   	reportIDs.forEach( (report:string)=>{
   		if(report === reportID){
-		  	var thisReport = JSON.parse(JSON.stringify(reportsData[reportID]))
+		  	var thisReport = JSON.parse(JSON.stringify(reportData[reportID]))
 		  	thisReport.selectorDataSets.dataSets.forEach( (dataSet:SelectorDataSets)=>{
 		  		dataSet.title = dataLanguage(dataSet.title)
 		  	})

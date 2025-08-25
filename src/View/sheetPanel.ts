@@ -1,4 +1,4 @@
-const sheetsData: {[sheet:string]: (sheet:Sheet)=>ConfigSheet} = require('../DataConfig/sheetsData.js')
+const sheetData: {[sheet:string]: (sheet:Sheet)=>ConfigSheet} = require('../DataConfig/sheetData.js')
 //const { alertBox }: UI = require('./ITEMS/UI.js')
 
 interface SheetPanel {
@@ -76,7 +76,7 @@ module.exports = {
   showPanel: (dataID: string) => {
     module.exports.dataID = dataID
     var year: string = new Date().getFullYear().toString()
-    var dataIDs:string[] = Object.keys(sheetsData)
+    var dataIDs:string[] = Object.keys(sheetData)
     var mySheet:ConfigSheet = {}
     if(dataIDs.indexOf(dataID) === -1){
       alertBox(dataLanguage('unregisteredsheet'))
@@ -89,8 +89,8 @@ module.exports = {
     var changeTitle:RowTitle = {title:'',type:'text'}
     dataIDs.forEach( (thiSheetDataID:string)=>{
       var thisSheet: ConfigSheet = {}
-      if(typeof sheetsData[thiSheetDataID] === 'function'){
-        var createSheetConfigFN:Function = sheetsData[thiSheetDataID]
+      if(typeof sheetData[thiSheetDataID] === 'function'){
+        var createSheetConfigFN:Function = sheetData[thiSheetDataID]
         thisSheet = createSheetConfigFN(module.exports.tabs.sheet)
         if(typeof thisSheet === 'object' && Array.isArray(thisSheet.rowTitle))
           thisSheet.rowTitle.forEach( (title:RowTitle)=>{
