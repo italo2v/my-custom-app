@@ -1,7 +1,7 @@
 const { calc }: Calc = require('../../Common/calc.js')
-const { dateFormats, masks }: FieldsMask = require('../../DataConfig/fieldMasks.js')
+const { dateFormats, masks }: maskConfig = require('../../DataConfig/fieldMasks.js')
 
-interface FieldsMask {
+interface maskConfig {
   dateFormats: {[lang:string]: string}
   masks: FieldMasks
 }
