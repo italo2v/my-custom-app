@@ -136,7 +136,7 @@ module.exports = {
     $('<td/>').attr('class', 'bottom').appendTo($tr)
     var $td = $('<td/>', {'class': 'bottom'}).appendTo($tr)
     $('<a/>', {'class': 'btn btn-primary', 'href': '#', 'id': 'addRow'}).text('+').on("click", function(){insertRow()}).appendTo($td)
-    var colspan = $divTitles.length-1
+    var colspan = $divTitles.length+2
     var $td = $('<td/>', {'class': 'bottom', 'colspan': colspan}).appendTo($tr)
     createRightStats()
     module.exports.updateFootLines()

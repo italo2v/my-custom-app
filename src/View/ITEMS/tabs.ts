@@ -80,7 +80,7 @@ function listTabs($place: JQuery){
           showInputNameTab(parseInt($(this).attr('data-tabNumber')||''))
     })
   })
-  $('<a/>', {'id': 'addTab', 'class': 'btn btn-primary addSheetTab', 'href': '#'}).text('+').appendTo('table.sheetTabs tr td').on("click", createEmptyTab)
+  $('<a/>', {'id': 'addTab', 'class': 'btn btn-primary addSheetTab', 'href': '#'}).text('+').appendTo('table.sheetTabs tr td').on("click", function(){createEmptyTab($place)})
   $('a.sheetTab').each( function(this: HTMLElement){
     if($(this).html() === activeTab)
       $(this).addClass('active')
@@ -88,7 +88,7 @@ function listTabs($place: JQuery){
     if($(e.target).children('input').length === 0 && e.button === 2){
       var tabNumber:number = parseInt($(e.target).attr('data-tabNumber')||'0')
       clickMenu.menuItems = [
-          {'id': 'newTab', 'function': createEmptyTab, 'text': dataLanguage('newtab')},
+          {'id': 'newTab', 'function': function(){createEmptyTab($place)}, 'text': dataLanguage('newtab')},
           {'id': 'renameTab', 'function': function(){showInputNameTab(tabNumber)}, 'text': dataLanguage('rename')},
           {'id': 'deleteTab', 'function': function(){deleteTab(tabNumber)}, 'text': dataLanguage('delete')}
         ]
@@ -101,7 +101,7 @@ function listTabs($place: JQuery){
   })
 }
 
-function createEmptyTab(){
+function createEmptyTab($place: JQuery){
   var tabs: string[] = Object.keys(module.exports.dataSet)
   var tabNumber:number = tabs.length
   var this_dataSet: SheetDataSet = {'data': [], 'active': true, 'tabNumber': tabNumber}
@@ -121,7 +121,7 @@ function createEmptyTab(){
     delete module.exports.dataSet[$activeTab.html()].active
   }
   module.exports.sheet.dataSet = this_dataSet
-  listTabs($('#sheetTabs'))
+  listTabs($place)
   module.exports.sheet.showSheet($('#spreadSheet'))
 }
 
@@ -149,7 +149,7 @@ function showInputNameTab(tabNumber:number){
     if(parseInt($(tab).attr('data-tabNumber')||'') === tabNumber){
       $(tab).attr('data-value', $(tab).html())
       $(tab).html('')
-      
+
       var $input = $('<input/>', {'type': 'text', 'maxlength': 50, 'class': 'large fieldNameTab lettersAndNumbers'}).appendTo(tab).on("keyup", function(e: JQuery.KeyUpEvent){
         if(e.key === 'Enter'){ //enter
           var nameexists:boolean = false
@@ -200,7 +200,7 @@ function deleteTab(tabNumber:number){
                 newTab = 0
               else
                 newTab = tabNumber-1
-               $('#sheetTabs a.sheetTab[data-tabNumber="'+newTab+'"]').addClass('active')
+               $('table.sheetTabs a.sheetTab[data-tabNumber="'+newTab+'"]').addClass('active')
             }
             var deletedTabName:string = $(tab).html()
             delete module.exports.dataSet[deletedTabName]
@@ -212,10 +212,15 @@ function deleteTab(tabNumber:number){
           }
         })
         var $spreadSheet = $('#spreadSheet')
-        var $activeTab = $('#sheetTabs a.sheetTab.active')
-        module.exports.dataSet[$activeTab.html()].active = true
-        module.exports.sheet.dataSet = module.exports.dataSet[$activeTab.html()]
-        module.exports.sheet.showSheet($spreadSheet)
+        var $activeTab = $('table.sheetTabs a.sheetTab.active')
+        if($activeTab.length > 0){
+          module.exports.dataSet[$activeTab.html()].active = true
+          module.exports.sheet.dataSet = module.exports.dataSet[$activeTab.html()]
+          module.exports.sheet.showSheet($spreadSheet)
+        }else{
+          module.exports.sheet.dataSet = {}
+          $spreadSheet.html('')
+        }
       }
     }
     verifyRule(module.exports.deleteTabRules, 0)
@@ -249,11 +254,10 @@ function moveTab(direction:string, tabNumber:number){
       $(this).attr('data-tabNumber', sheetTabDataSet.tabNumber)
     }
   })
-  var $place = $('#spreadSheet').parent()
-  $('#sheetTabs a.sheetTab').toArray().sort( (a:HTMLElement, b:HTMLElement)=>{
+  $('table.sheetTabs a.sheetTab').toArray().sort( (a:HTMLElement, b:HTMLElement)=>{
     return parseInt($(a).attr('data-tabNumber')||'') - parseInt($(b).attr('data-tabNumber')||'')
   }).forEach( (sheetTab: HTMLElement)=>{
-    $(sheetTab).appendTo($place)
+    $(sheetTab).appendTo('table.sheetTabs')
   })
-  $('#addTab').appendTo($place)
+  $('#addTab').appendTo('table.sheetTabs')
 }

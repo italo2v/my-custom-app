@@ -214,7 +214,8 @@ function createPanel(afterFN?: Function){
         showCopyEntries($span, Object.keys(module.exports.dataSetYears))
         module.exports.tabs.dataSet = {}
       }
-    }else{
+    }
+    if(Object.keys(result.dataSet).length === 0){
       module.exports.tabs.dataSet = {}
       module.exports.dataSetYears[selectedYear] = module.exports.tabs.dataSet
       module.exports.tabs.showTabs($sheetTabs)

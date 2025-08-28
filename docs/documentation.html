@@ -18,77 +18,77 @@
     <script type="text/javascript">
         $('<div/>', {class: 'alert alert-info', role: 'alert'}).html('You will need to have the Node Package Manager (NPM) installed to run, follow the instructions in <a href="https://docs.npmjs.com/downloading-and-installing-node-js-and-npm">NPM Installation</a>. The latest tested working versions are node v24.0.2 and npm 11.4.0. To create your App you just need to download this app source code, run the command "npm install" in the extracted app folder, change the package.json file with your title and descriptions, change the configuration files in the src/DataConfig/ folder, replace the icon.png image to update the App icon and later run the command "npm build-all" in the app folder to get the created .deb, .rpm, .exe, .snap and .AppImage files in the out/ folder. You may also run the command "npm start" to test you App.').appendTo('#docBody')
       function architecture(){
-        $('<div/>', {class: 'alert alert-info', role: 'alert'}).html('All the modules in this architecture are inside the folder "src" as a TypeScript. You must run the "tsc" command in the app dir to update your configuration and make the JavaScript files into the dir "dist-js" which will be included in the Electron Package. Note: when you run "npm start" or "npm make" or other package script It\'s running "tsc" command automatically.').appendTo('#docBody')
+        $('<div/>', {class: 'alert alert-info', role: 'alert'}).html('All the modules in this architecture are inside the folder "src" as a TypeScript. You must run the "tsc" command in the app directory to update your configuration and make the JavaScript files into the directory "dist-js" which will be included in the Electron Package. Note: when you run "npm start" or "npm make" or other package script it\'s running "tsc" command automatically.').appendTo('#docBody')
         var div = $('<div/>', {style: 'overflow:auto;width:100%;'}).appendTo('#docBody')
         $("<img/>", {src: './files/architecture.png'}).appendTo(div)
       }
-      var main = {abstract: 'The start script for Electron app. It makes the communication between Control/controls.ts module and View/index.ts. It creates the listenings ipcMain.on() to execute the controls functions and creates the main Browser Window (chrome-sandbox) that loads the View/index.html file which includes the View/index.ts. It also uses getCookie and setCookie functions to save the interface configurations theme, language, textSize and windowPosition.',
+      var main = {abstract: 'The start script for Electron app. It makes the communication between Control/controls.ts module and View/index.ts. It creates the listenings ipcMain.on() to execute the controls functions and creates the main Browser Window (chrome-sandbox) that loads the View/index.html file which includes the View/index.ts. It also uses getCookie() and setCookie() functions to save the interface configurations theme, language, textSize and windowPosition.',
         variables: {
           my_diaglanguage: 'An object that contains the language definitions of the ask quit confirmation.'
         },
         constants: {
-          ipcMain: 'The electron module used to listen to the View user interface an perform a "server side" operation.',
+          ipcMain: 'The electron module used to listen to the View user interface and perform a "server side" operation.',
           controls: 'The module in Control/controls.ts used to control the read/write data operations (e.g. access, allowed values, allow operation?, etc).',
           baseURL: 'An URL string used to save the cookie variables.',
           listControls: 'An array that contains a list of listening for the <span class="text-success"><b>ipcMain.on()</b></span> function to redirect to a Control function in controls module.',
         },
         functions: {
-          getLanguage: 'Returns all the language definitions from <span class="text-success"><b>Controls.getLanguague()</b></span> based on saved cookie language configuration.',
+          getLanguage: 'Returns all the language definitions from <span class="text-success"><b>Controls.getLanguage()</b></span> based on saved cookie language configuration.',
           getCookie: 'Returns the saved cookie variable that currently is used by <b>theme</b>, <b>fontSize</b>, <b>langLocale</b> and <b>windowPosition</b> configuration variables.',
           setCookie: 'Saves a cookie variable that currently maybe <b>theme</b>, <b>fontSize</b>, <b>langLocale</b> and <b>windowPosition</b>.',
-          createWindow: 'Creates the main Browser Window (chrome-sandbox) that loads the View/index.html file and set the window size and position based on saved cookie windowPosition configuration. The function also sends the language definitions, the text size and theme configuration based on saved cookie variables to the window after It\'s loaded. The function also creates the confirmation box when the user try to close the Browser Window.',
+          createWindow: 'Creates the main Browser Window (chrome-sandbox) that loads the View/index.html file and sets the window size and position based on the saved cookie windowPosition configuration. The function also sends the language definitions, the text size and theme configuration based on the saved cookie variables to the window after it\'s loaded. The function also creates the confirmation box when the user try to close the Browser Window.',
         },
         events: {
-          'ipcMain.on("change-theme")': 'A listening to the View interface that saves a cookie variable that contains the user chosen theme and returns the theme value.',
-          'ipcMain.on("change-textsize")': 'A listening to the View interface that saves a cookie variable that contains the user chosen text size and returns the text size value.',
-          'ipcMain.on("change-language")': 'A listening to the View interface that saves a cookie variable that contains the user chosen language and return the current language definitions.',
+          'ipcMain.on("change-theme")': 'A listening to the View interface that saves a cookie variable which contains the user chosen theme and returns the theme value.',
+          'ipcMain.on("change-textsize")': 'A listening to the View interface that saves a cookie variable which contains the user chosen text size and returns the text size value.',
+          'ipcMain.on("change-language")': 'A listening to the View interface that saves a cookie variable which contains the user chosen language and return the current language definitions.',
         }
       }
-      var calc = {abstract: 'A module used to calculate formula expressions.', requiredBy: 'View/ITEMS/sheetField.ts to calculate sheetField value and Model/selector.ts to calculate field value and perform operations.',
-        exports: {'calc(value)': 'Receives a formula starting with "=" (e.g. =(5+100)/2), uses the function <span class="text-success"><b>solveExpression</b></span> to get the result of each operation respecting the round brackets priority "()" and returns the result of all operations or the value "#!calcerror" in case of a formula error.'},
-        functions: {solveExpression: 'Receives an expression with 2 operands and an operator (e.g. 2+2, 5*10) and returns the result.'},
+      var calc = {abstract: 'A module used to calculate expressions.', requiredBy: 'View/ITEMS/sheetField.ts to calculate a sheetField value and Model/selector.ts to calculate a field value and perform operations.',
+        exports: {'calc(value)': 'Receives an expression starting with "=" (e.g. =(5+100)/2), uses the function <span class="text-success"><b>solveOperation</b></span> to get the result of each operation respecting the round brackets priority "()" and returns the result of all operations or the value "#!calcerror" in case of an expression error.'},
+        functions: {solveOperation: 'Receives an operation containing two operands and one operator (e.g. 2+2, 5*10) and returns the result.'},
       }
-      var db = {abstract: 'A module used to define database operations including read/write collections or json files. The data may be saved on local config dir on json files using the "localdb" variable or on a MongoDB server using the "mondodb" variable. Currently It\'s only using the localdb. Operations may be find/findOne/aggregate/bulkWrite/deleteOne. The operation find returns and array of objects. The operation findOne returns the first object found. The operation aggregate joins 2 objects from 2 collections or json files based on a matched value. The operation bulkWrite saves a document to a collection or json file. The operation deleteOne deletes the first object found.',
+      var db = {abstract: 'A module used to define database operations including read/write collections or json files. The data may be saved on local configuration directory on json files using the "localdb" variable or on a MongoDB server using the "mondodb" variable. Currently it\'s only using the localdb. Operations may be find/findOne/aggregate/bulkWrite/deleteOne. The operation find returns an array of objects. The operation findOne returns the first object found. The operation aggregate joins 2 objects from 2 collections or json files based on a matched value. The operation bulkWrite saves a document to a collection or json file. The operation deleteOne deletes the first object found.',
         requiredBy: 'Control/controls.ts module to perform read/write data operations.',
         constants: {selector: 'The module Model/selector.ts used to select, perform operations and/or group the data to be used on reports.'},
         exports: {
           mongodb: 'A variable that was used to create the MongoDB server connection. Currently not being used.',
-          localdb: 'A variable that contains a module used to read/write documents to a json file in the local config dir.',
+          localdb: 'A variable that contains a module used to read/write documents to a json file in the local configuration dir.',
           'listLanguages()': 'A function that returns all the possible languages including the name, abbreviation and picture of each one.',
-          'getLanguage(language)': 'A function that receives a language name and returns all the language translations by the selected language.',
-          'getLanguageSystem()': 'A function that returns all the language translations by the saved language in the config <span class="text-danger">system.json</span> file.',
-          'getSystemConfig()': 'A function that returns the system config saved in the config collection/json file.',
-          'registerSystemConfig(config)': 'A function that writes the system config in the config collection/json file.',
-          'deleteSystemConfig(id)': 'A function that deletes the system config in the config collection/json file searching for It\'s ID.',
+          'getLanguage(language)': 'A function that receives a language name and returns all the language translations by the given language.',
+          'getLanguageSystem()': 'A function that returns all the language translations by the saved language in the configuration <span class="text-danger">system.json</span> file.',
+          'getSystemConfig()': 'A function that returns the system configuration saved in the configuration collection/json file.',
+          'registerSystemConfig(config)': 'A function that writes the system configuration in the configuration collection/json file.',
+          'deleteSystemConfig(id)': 'A function that deletes the system configuration in the configuration collection/json file searching for its ID.',
           'getData(collection)': 'A function that returns the dataset saved in a collection/json file.',
           'getReportData(SelectorData[])': 'A function that receives an array of selectors data and returns the joined datasets of multiple collection/json files to be used in a report. The selectors data are used to get a specific period data and to group by a period of year, bimester, quarter or semester. The selectors data are also used to get only specific tabs from the datasets and to group data by each entry, tabs or datasets.',
-          'deleteData(collection, id)': 'A function that deletes an object of a collection/json file searching for It\'s ID.',
+          'deleteData(collection, id)': 'A function that deletes an object of a collection/json file searching for its ID.',
           'saveData(collection, dataset)': 'A function that saves the dataset in a collection/json file.',
-          'getStock(ticker, market)': 'A function that returns an stock object saved in the "stockPrice" collection/json file searching for It\'s ticker and market values.',
+          'getStock(ticker, market)': 'A function that returns an stock object saved in the "stockPrice" collection/json file searching for its ticker and market values.',
           'registerStock(stock)': 'A function that saves an stock object in the "stockPrice" collection/json file.',
-          'deleteStock(id)': 'A function that deletes an stock object saved in the "stockPrice" collection/json file searching for It\'s ID.'
+          'deleteStock(id)': 'A function that deletes an stock object saved in the "stockPrice" collection/json file searching for its ID.'
         },
         functions: {joinDataSets: 'Joins multiple tabs from multiple datasets of different collections/json files and may calculate the sum total for each collumn of the joined tabs. If 2 or more datasets have the same tab name, all the rows will be joined in a unique tab name.'},
       }
-      var localdb = {abstract: 'A module that performs find/findOne/aggregate/bulkWrite/deleteOne type operations in a json file of the local user data config dir.',
+      var localdb = {abstract: 'A module that performs find/findOne/aggregate/bulkWrite/deleteOne type operations in a json file of the local user data configuration directory.',
         requiredBy: 'Model/db.ts module to perform read/write json files.',
         exports: {
           'connection(collection, type, arg, arg2?)': 'A function that receives a collection/json file name and a type operation and returns the result of the operation including error, number of deleted objects, number of inserted objects, list of IDs of the inserted objects and/or the selected data. The <b>arg</b> variable may be an object with <b>_id</b> variable to filter in case of deleteOne, a list of objects to insert in case of bulkWrite, an object with a specific filter to search for in case of find/findOne or an object to combine multiple collections/json files in case of aggregate. The <b>arg2</b> variable may be an object with <b>projections</b> variable in case of find/findOne used to return only the specific variables from selected objects, value "0" is used to exclude the variable from search result objects and value "1" is used to include the variable in the search result objects.',
-          userDataPath: 'A variable that saves the local user data config dir path used to save/read files.',
-          appPath: 'A variable that saves the current dir of the executing app used to copy the default <span class="text-danger">languages.json</span> and <span class="text-danger">system.json</span> files to local config dir in case of first time of execution or a change in <span class="text-danger">languages.json</span>.'
+          userDataPath: 'A variable that saves the local user data configuration directory path used to save/read files.',
+          appPath: 'A variable that saves the current directory of the executing app used to copy the default <span class="text-danger">languages.json</span> and <span class="text-danger">system.json</span> files to local configuration directory in case of first time of execution or a change in <span class="text-danger">languages.json</span>.'
         },
         functions: {
           deleteOne: 'Deletes an object from a collection/json file searching for the filter <span class="text-primary">{_id: "value"}</span> in case of deleteOne operation and returns the number of deleted objects and/or an error.',
           make_id: 'Returns a string id of 24 caracters used to insert a new object to a collection/json file.',
           insertOne: 'Inserts one or more objects to a collection/json file in case of bulkWrite operation and returns the number of inserted objects and list of inserted ids and/or an error.',
-          aggregate: 'Returns the result objects of 2 collections/json files based on a macth in case of aggregate operation.',
+          aggregate: 'Returns the result objects of 2 collections/json files based on a match in case of aggregate operation.',
           find: 'Returns a list of objects or one object from a collection/json file in case of the find/findOne operations.',
-          get_entries: 'Used by the <span class="text-success"><b>find</b></span> function to filter the objects to return based on the <b>arg</b> variable and may filter the result objects variables to return based on <b>projections</b> in the <b>arg2</b> variable.'
+          get_entries: 'Used by the <span class="text-success"><b>find</b></span> function to filter the objects to return based on the <b>arg</b> variable and may filter the result object variables to return based on <b>projections</b> in the <b>arg2</b> variable.'
         },
       }
-      var selector = {abstract: 'Module used to select some data and perform some calculations and maybe group the data to be shown in a report.',
-        requiredBy: 'Model/db.ts module to perform data selection and operations.',
-        constants: {calcField: 'The module Common/calc.ts used to calculate formula expressions.'},
+      var selector = {abstract: 'Module used to select some data and maybe perform some operations and maybe group the data to be shown in a report.',
+        requiredBy: 'Model/db.ts module to return a configured dataset report.',
+        constants: {calcField: 'The module Common/calc.ts used to calculate expressions.'},
         functions: {
           getRowConnection: 'Receives the object <b>connection</b> of the selector, the row data and the join collection dataSet to discover which row data of the join collection will be used to join and returns "null" if the join row data was not found or returns the row data of the join collection if it was found.',
           applyFilter: 'Receives a field value, a condiction and a value to be compared and returns "true" if the condiction was satisfied or "false" if the condiction was not satisfied. The condiction value must be "equal", "different", "greater", "smaller", "greaterOrEqual" or "smallerOrEqual".',
@@ -97,18 +97,18 @@
           getUniqueField: 'Receives the <b>unique</b> variable of the selector, the collection and join collection row data that may be used to group multiple rows into one row as they have the same name and each value of the unique field must be separated by a colon ":" (e.g. <span class="text-primary">tabName:collection._id</span> will not group any row and <span class="text-primary">tabName:collection.0</span> will group every row that has the same value in the first cell and belongs to a tab that has the same name). The function firstly uses the function <span class="text-success"><b>getSelectorFields</b></span> to save the necessary variables and later saves the variable <b>uniqueField</b> in the last cell of the collection row data and returns the updated row data.',
           updateFields: 'Receives the array <b>updateFields</b> of the selector, the collection row data and the join collection row data to replace one collection field value by by a join collection field value (e.g. <span class="text-primary">{{<b>field</b>: "collection.0", <b>update</b>: "join.name"}}</span> to replace an ID that points to a join collection row in the first value by a field named of the join collection row) and returns the collection row data updated.',
           sliceData: 'Receives the row to be sliced, the start and end date positions and some date variables to slice the row data remaining only the first cell and the months between the <b>startDate</b> and <b>endDate</b> and also the months between the start and end date positions of <b>datePos</b> or <b>joinDatePos</b> and returns the sliced row data.',
-          getValue: 'Receives a row cell and maybe a variable name and try to find the variable name value inside the cell or try to find the default variable <b>value</b> if there is no variable name. Uses the module function <span class="text-success"><b>calcField.calc</b></span> to get the result number in case of the variable value is a formula expression starting with "=". The function returns the value (maybe calculated) found or "null" if no variable was found in the cell.',
-          getFirstOrLastField: 'Receives a row, variable name, and a position to get the value of the variable field of <b>fieldOperations</b> in the first month cell, last month cell, first not null month cell or last not null month cell of a year using the function <span class="text-success"><b>getValue</b></span> and returns the field variable value.',
+          getValue: 'Receives a row cell and maybe a variable name and try to find the variable name value inside the cell or try to find the default variable <b>value</b> if there is no variable name. Uses the module function <span class="text-success"><b>calcField.calc</b></span> to get the result number in case of the variable value is a expression starting with "=". The function returns the value (maybe calculated) found or "null" if no variable was found in the cell.',
+          getFirstOrLastField: 'Receives a row, variable name and a position to get the value of the variable field of <b>fieldOperations</b> in the first month cell, last month cell, first not null month cell or last not null month cell of a year using the function <span class="text-success"><b>getValue</b></span> and returns the field variable value.',
           getFieldValues: 'Receives a field name of <b>fieldOperations</b> and returns the separated field position, field variable to be calculated, field dataSet name, and the entire row the field is in to be used by the function <span class="text-success"><b>resolveOperations</b></span>. The variable to be calculated of a given cell in <b>field</b> or <b>field2</b> will be the default <b>value</b> or a variable name inside the brackets "[]" right after the position using the functions <span class="text-success"><b>getValue</b></span> or <span class="text-success"><b>getFirstOrLastField</b></span>.',
           applyOperator: ' Receives 2 values of type number, an operator "+", "-", "/", "*" or "^", a operation name and a result row cell to perform the calculation on the values and inserts the result in a variable of the operation name inside the object <b>operations</b> in the result row cell and returns the updated cell.',
-          resolveOperations: 'Receives the array <b>fieldOperations</b> of the selector, a row of the collection dataSet and a row of the join collection dataSet to perform some calculations. Uses the functions <span class="text-success"><b>getFieldValues</b></span> and/or <span class="text-success"><b>getValues</b></span> to receive the operators and perform the operations using the function <span class="text-success"><b>applyOperator</b></span>. The rows will be updated adding the object <b>operations</b> in every cell calculated when using the "*" any cell position in the <b>field</b> or <b>field2</b> variables or adding the result object <b>operations</b> in the last cell in case of 2 specific fields. This function returns the rows updated with their operations result.',
-          mergeValues: 'Receives a cell to compute and a second cell to save the merged values, that means all the variables inside to first cell will be copied into the second cell in case of a variable of type number except for the variable <b>_id</b>. In case of the variable already exists in the second(merged) cell they will be added and the count <b>variableName-count</b> will be incremented and the <b>variableName-average</b> will be updated as well. Returns the sencond(merged) cell with variables updated.',
+          resolveOperations: 'Receives the array <b>fieldOperations</b> of the selector, a row of the collection dataSet and a row of the join collection dataSet to perform some calculations. Uses the functions <span class="text-success"><b>getFieldValues</b></span> and/or <span class="text-success"><b>getValues</b></span> to receive the operators and perform the operations using the function <span class="text-success"><b>applyOperator</b></span>. The rows will be updated adding the object <b>operations</b> in every cell calculated when using the "*" any cell position in the <b>field</b> or <b>field2</b> variables or adding the result object <b>operations</b> in the last cell in case of 2 specific fields. This function returns the updated rows with the results of the operations.',
+          mergeValues: 'Receives a cell to compute and a second cell to save the merged values, that means all the variables inside to first cell will be copied into the second cell in case of a variable of type number except for the variable <b>_id</b>. In case of the variable already exists in the second(merged) cell they will be added and the count <b>variableName-count</b> will be incremented and the <b>variableName-average</b> will be updated as well. Returns the sencond(merged) cell with the updated variables.',
           mergeData: 'Receives a row to be grouped by the <b>uniqueField</b> variable created by the function <span class="text-success"><b>getUniqueField</b></span> in the last cell and creates a new row in the <b>mergedDataTabs</b> in case of a new unique name or merge their values using the function <span class="text-success"><b>mergeValues</b></span> in case of the unique field already exists (e.g. all rows of a tab will be grouped as one row in case of the unique name is "tabName"). The function also places the month cells between the positions in the variable <b>datePos</b> in the corresponding positions between the <b>startDate</b> and <b>endDate</b> of the selected period. Returns the <b>mergedDataTabs</b> variable with the row fields updated.',
           getMergedPositions: 'Receives the desired position of the row of a year and returns the merged position in the <b>mergedDataTabs</b> after all months between the <b>startDate</b> and <b>endDate</b> were appended in a single row.',
           groupDataByPeriod: 'Receives the <b>groupByPeriod</b> variable and the row to be grouped and merge their values using the function <span class="text-success"><b>mergeValues</b></span>, that means all the month variables in a period will be added using the function <span class="text-success"><b>getMergedPositions</b></span> to get the corresponding position in the <b>mergedDataTabs</b> row since all years were appended and returns the row with months grouped by a period ("year", "semester", "quarter" or "bimester").',
         },
         exports: {
-          'selectData(collection, join_collection, selector)': 'A function that receives a collection dataSet and maybe a second collection dataSet to join and perform operations. The function receives a <b>selector</b> object to select a specific period data and also may select only specific tabs. It may calculate some operations in the data to be shown and later may group it by each unique field (e.g. entry name, tab name or dataSet name) getting the sum and average of a all months variables grouped and maybe group some months by bimester, quarter, semester or year calculating again the sum and average of all variables added.<br>{ul=selector}</div>'
+          'selectData(collection, join_collection, selector)': 'A function that receives a collection dataSet and maybe a second collection dataSet to join and perform operations. The function receives a <b>selector</b> object to select a specific period data and also may select only specific tabs. It may calculate some operations in the data to be shown and later may group it by each unique field (e.g. entry name, tab name or dataSet name) getting the sum and average of all months variables grouped and maybe group some months by bimester, quarter, semester or year calculating again the sum and average of all variables added.<br>{ul=selector}</div>'
         },
         'ul-selector': {title: 'The selector object variables are:', li: [
           {title: 'startDate', desc: 'includes the start month and start year to start collecting data(e.g. MM-YYYY=<span class="text-primary">01-2025</span>);'},
@@ -136,57 +136,56 @@
         functions: {getZipBase64: 'A function that converts a zip file to base64 and saves a temporary zip file in /tmp and returns the path to the zip file.'},
         exports: {
           systemConfig: 'An object of a system configuration. The <b>userDataPath</b> and <b>appPath</b> variables are obtained in main.ts when creating the Browser Window and the others are saved in <span class="text-danger">system.json</span>. {ul=systemConfig}',
-          'getSystemConfig()': 'A function to get the system configuration using the function <span class="text-success"><b>db.getSystemConfig</b></span>, remove the adminPassword and return the systemConfig or an empty object in case of the system config was not found. It also updates the module db.localdb variables <b>userDataPath</b> and <b>appPath</b>.',
+          'getSystemConfig()': 'A function to get the system configuration using the function <span class="text-success"><b>db.getSystemConfig</b></span>, remove the adminPassword and return the systemConfig or an empty object in case of the system configuration was not found. It also updates the module db.localdb variables <b>userDataPath</b> and <b>appPath</b>.',
           'updateSystemConfig(systemConfig)': 'A function that was used to update the system configuration when the configurationPanel was activated. Currently not being used.',
           'changeAdminPassword(currentpassword, admin_password)': 'A function used to change the admin password when the configurationPanel was activated. Currently not being used.',
           'getAdminPassword()': 'A function used to get the admin password to verify on login when the configurationPanel was activated. Currently not being used.',
-          'listLanguages()': 'A function that uses the function <span class="text-success"><b>db.listLanguages</b></span> to return a list all languages and their descriptions.',
+          'listLanguages()': 'A function that uses the function <span class="text-success"><b>db.listLanguages</b></span> to return a list of all languages and their descriptions.',
           'getLanguage(langLocale)': 'A function that receives the string <b>langLocale</b> and uses the function <span class="text-success"><b>db.getLanguage</b></span> to return the desired language translations in case of it was found or uses the function <span class="text-success"><b>getLanguageSystem</b></span> to return the default system language translations.',
-          'getLanguageSystem()': 'A function that uses the function <span class="text-success"><b>db.getLanguageSystem</b></span> to return the default language in <span class="text-danger">system.json</span> and It\'s translations.',
-          'getData(collection)': 'A function used to get all the data of a collection dataSet using the function <span class="text-success"><b>db.getData</b></span> and receives a collection name as string and returns the data or an read data error.',
-          'getEntriesData(collection)': 'A function used to get only the entries (first values) of a collection dataSet using the function <span class="text-success"><b>getData</b></span> and receives a collection name as string and returns the entries dataSet (empty or not).',
+          'getLanguageSystem()': 'A function that uses the function <span class="text-success"><b>db.getLanguageSystem</b></span> to return the default language in <span class="text-danger">system.json</span> and its translations.',
+          'getData(collection)': 'A function used to get all the data of a collection dataSet using the function <span class="text-success"><b>db.getData</b></span> which receives a collection name as string and returns the data or an read data error.',
+          'getEntriesData(collection)': 'A function used to get only the entries (first values) of a collection dataSet using the function <span class="text-success"><b>getData</b></span> which receives a collection name as string and returns the entries dataSet (empty or not).',
           'verifyForeignKey(collection, year, ids[])': 'A function used to verify if a dataSet row is being used by another dataSet when the user tries to delete a row or an entire tab. The function receives a collection dataSet name, a year and a list of ids in a tab or one row id and uses the function <span class="text-success"><b>getData</b></span> to read the collection dataSet and returns "false" if an id was found in the year of the dataSet or "true" if no id was found.',
-          'getReportData(SelectorDB)': 'A function that receives a <b>selectorDB</b> object used to get a selection of some collection dataSets to show in a report using the <b>selector</b> objects in the function <span class="text-success"><b>db.getReportData</b></span> and returns an read data error, the selected data or an empty array. Each <b>selector</b> object is configured in this function according to each <b>dataID</b> adding the date positions, join collection, field names, filters and field operations. {ul=selectorDB}',
-          'getReportYearsTabs(dataSets[])': 'A function that receives an array <b>dataSets</b> of dataSet selectors tha uses each <b>dataID</b> variable in the function <span class="text-success"><b>getData</b></span> and later returns only the years and tab names of a dataSet list. It\'s useful in the selectors of the Report Panel to show the tabs and years of multiple dataSets.',
-          'saveData(collection, dataSet)': 'A function used to save a dataSet to a collection name that uses the functions <span class="text-success"><b>verifyTickerUnique</b></span> and <span class="text-success"><b>verifyNegativeStockQuantity</b></span> in case of trying to save the "variableStocks" collection dataSet. If the operation is authorized then the function will delete the existing one and save a new dataSet. The function returns "emptyinserted" in case of a new blank dataSet when the <b>empty</b> arg is found, "dataupdated" in case of deleting the existing one and/or saving a new one, "dataundeleted" in case of an error on deleting the existing dataSet or "registerdataerror" in case the dataSet was not saved. The function may also returns "tickernotunique" in case of a duplicated entry ticker and market or "negativestockquantity" in case of any stock has a negative value in quantity in case of a "variableStocks" collection dataSet.',
+          'getReportData(SelectorDB)': 'A function that receives a <b>selectorDB</b> object used to get a selection of some collection dataSets to show in a report using the <b>selector</b> objects in the function <span class="text-success"><b>db.getReportData</b></span> and returns a read data error, the selected data or an empty array. Each <b>selector</b> object is configured in this function according to each <b>dataID</b> adding the date positions, join collection, field names, filters and field operations. {ul=selectorDB}',
+          'getReportYearsTabs(dataSets[])': 'A function that receives an array <b>dataSets</b> of dataSet selectors to use each <b>dataID</b> variable in the function <span class="text-success"><b>getData</b></span> and later returns only the years and tab names of a dataSet list. It\'s useful in the selectors of the Report Panel to show the tabs and years of multiple dataSets.',
+          'saveData(collection, dataSet)': 'A function used to save a dataSet to a collection name. It uses the functions <span class="text-success"><b>verifyTickerUnique</b></span> and <span class="text-success"><b>verifyNegativeStockQuantity</b></span> in case of trying to save the "variableStocks" collection dataSet. If the operation is authorized then the function will delete the existing one and save a new dataSet. The function returns "emptyinserted" in case of a new blank dataSet when the <b>empty</b> arg is found, "dataupdated" in case of deleting the existing one and/or saving a new one, "dataundeleted" in case of an error on deleting the existing dataSet or "registerdataerror" in case the dataSet was not saved. The function may also returns "tickernotunique" in case of a duplicated entry ticker and market or "negativestockquantity" in case of any stock has a negative value in quantity in case of a "variableStocks" collection dataSet.',
           'getStock(ticker, market)': 'A function that receives the variables <b>ticker</b> and <b>market</b> to get a stock object using the function <span class="text-success"><b>db.getStock</b></span> and returns the object containg ticker, market and price data or "none" in case of the stock was not found.',
           'registerStock(ticker, market, data)': 'A function that receives the <b>ticker</b>, <b>market</b> and <b>data</b> variables containing the monthly prices to save a new stock object or update an existing one using the functions <span class="text-success"><b>getStock</b></span> and <span class="text-success"><b>deleteStock</b></span> to delete a possibly existing one and the function <span class="text-success"><b>db.registerStock</b></span> to save a new one. The function may return "stockregistered" in case of saving a new one and deleting a possibly existing one, "stockundeleted" in case of an error when trying to delete the existing one or "stockunregistered" in case of an error when trying to save the new one.',
           'deleteStock(id)': 'A function that receives an stock object ID and uses the function <span class="text-success"><b>db.deleteStock</b></span> used to delete a stock object and returns "stockdeleted" in case of a successful deletion or "stockundeleted" in case of an error or the id was not found.',
-          'verifyTickerUnique(dataSet)': 'A function used to verify if there is another stock registered in the same year of the given dataSet with the same ticker and market values and returns "true" if there are no ticker and market duplication on the dataSet in the same year and "false" if a duplication was found.',
-          'verifyNegativeStockQuantity(dataSet)': 'A function used to verify if there is any stock being registered with a negative quantity at any time while performing the transactions and returns "false" if no negative quantity was found and "true" if at least one of the stocks has a negative quantity.',
-          'backupData()': 'A function used to get all json files used by the app in the config dir (<b>systemConfig.userDataPath</b>) and compress using zip format and uses the function <span class="text-success"><b>getZipBase64</b></span> to return the path a to the temporary file created in /tmp.'
+          'verifyTickerUnique(dataSet)': 'A function used to verify if there is another stock registered in the same year of the given dataSet with the same ticker and market values and returns "true" if there are no ticker and market duplication on the dataSet in the same year or returns "false" if a duplication was found.',
+          'verifyNegativeStockQuantity(dataSet)': 'A function used to verify if there is any stock being registered with a negative quantity at any time while performing the transactions and returns "false" if no negative quantity was found or returns "true" if at least one of the stocks has a negative quantity.',
+          'backupData()': 'A function used to get all json files used by the app in the configuration directory (<b>systemConfig.userDataPath</b>) and compress using zip format and uses the function <span class="text-success"><b>getZipBase64</b></span> to return the path to the temporary file created in /tmp.'
         },
         'ul-systemConfig': {title: 'The systemConfig object variables are:', li: [
-          {title: 'userDataPath', desc: 'used to save the local config dir of the user to save/read files;'},
-          {title: 'appPath', desc: 'the path to the app dir to copy the <span class="text-danger">system.json</span> or <span class="text-danger">languages.json</span> files in case of the local dir is missing it or a change in <span class="text-danger">languages.json</span>;'},
+          {title: 'userDataPath', desc: 'used to save the local configuration directory of the user to save/read files;'},
+          {title: 'appPath', desc: 'the path to the app directory to copy the <span class="text-danger">system.json</span> or <span class="text-danger">languages.json</span> files in case of the local user directory is missing it or a change in <span class="text-danger">languages.json</span>;'},
           {title: 'adminPassword', desc: 'used to save the hash of an admin password;'},
-          {title: 'language', desc: 'the default system language in case of It\'s cookie was not found;'},
-          {title: 'textSize', desc: 'the default system text size in case of It\'s cookie was not found;'},
-          {title: 'theme', desc: 'the default system theme in case of It\'s cookie was not found;'},
+          {title: 'language', desc: 'the default system language in case of its cookie was not found;'},
+          {title: 'textSize', desc: 'the default system text size in case of its cookie was not found;'},
+          {title: 'theme', desc: 'the default system theme in case of its cookie was not found;'},
           {title: 'mongo_db', desc: 'the host, port, dbname, dbuser and dbpassword configurations of MongoDB server (currently not being used).'},
         ]},
         'ul-selectorDB': {title: 'The selectorDB object variables are:', li: [
           {title: 'dataSets', desc: 'an array of dataSets used to create a <b>selector</b> object of the Model/selector.ts module for each one dataSet(e.g <span class="text-primary">[ {<b>title</b>: "MyDataTitle", <b>dataID</b>: "MyCollectionDataSet"}, {<b>title</b>: "MyDataTitle2", <b>dataID</b>: "MyCollectionDataSet2"}]</span>);'},
           {title: 'groupByPeriod', desc: 'a variable to be included in every dataSet and may be "year", "semester", "quarter" and "bimester" and may group all the dataSets by a period according to each specific dataSet date positions;'},
           {title: 'showTotal', desc: 'a boolean variable to be included in every dataSet and if is "true" every dataSet will get a total row creating the sum for each collumn and later all the total dataSet rows will be added in a single row to be shown in a report;'},
-          {title: 'groupData', desc: 'a variable that may be "firstValue", "tabs" or "dataSets" and may group every dataSet by a specifid value according to each specific dataSet definitions and will include a variable <b>unique</b> in every dataSet;'},
+          {title: 'groupData', desc: 'a variable that may be "firstValue", "tabs" or "dataSets" and may group every dataSet by a specified value according to each specific dataSet definitions and will include a variable <b>unique</b> in every dataSet;'},
           {title: 'startDate', desc: 'a variable to be included in every dataSet and represents the start month and start year separated by a hyphen "-" to start collecting data for the report (e.g. MM-YYYY=<span class="text-primary">01-2025</span>);'},
           {title: 'endDate', desc: 'a variable to be included in every dataSet and represents the end month and end year separated by a hyphen "-" to stop collecting data for the report (e.g. MM-YYYY=<span class="text-primary">12-2025</span>).'},
         ]}
       }
-      var index = {abstract: 'The start script to render the View User Interface in the Browser Window. It simply get the language translations and system config, adds the title to the page and creates the main menu in the top of the window. Note: all the variables, constants and functions here may be used directly in any module of the View.',
+      var index = {abstract: 'The start script to render the View User Interface in the Browser Window. It simply gets the language translations and system configuration, adds the title to the page and creates the main menu in the top of the window. Note: all the variables, constants and functions here may be used directly in any module of the View.',
         variables: {
-          dataSetNames: 'An object containg all dataID and respective menuTitle created in the buttons DataConfig/buttonsData.ts that may be used to show in errors.',
+          dataSetNames: 'An object containg all dataID and respective menuTitle created in the buttons DataConfig/buttonData.ts that may be used to show in errors.',
           datalanguage: 'An array of the current language translations used in every module of the View by the function <span class="text-success"><b>dataLanguage</b></span>.',
           myUser: 'An object that is used to save the login user and is always sent to the controls functions by the functions <span class="text-success"><b>send</b></span> and <span class="text-success"><b>get</b></span> to verify permissions. Currently not being used.',
           systemConfig: 'An object that saves the current system configuration like theme, font size and language.',
           version: 'A string that saves the current version of the app used in the about message.'
         },
         constants: {
-          mainMenu: 'The module View/ITEMS/mainMenu.ts to create the main menu in top of the window.',
-          mainMenuData: 'The module DataConfig/buttonsData.ts to get the configurations of the data buttons of the main menu.',
+          mainMenu: 'The module View/ITEMS/mainMenu.ts to create the main menu in the top of the window.',
+          mainMenuData: 'The module DataConfig/buttonData.ts to get the configurations of the data buttons of the main menu.',
           sheetPanel: 'The module View/sheetPanel.ts used to create the main panel to manage the sheets.',
-          variableStocks: 'The module View/variableStocks.ts used to create the main panel to manage the sheets of variable stocks data.',
           reports: 'The module View/reports.ts used to create the main panel to show a report.',
         },
         functions: {
@@ -196,14 +195,13 @@
           listLanguages: 'The listLanguages function of the module UI.ts.',
           dataLanguage: 'The function to get a specific translation in the variable <b>datalanguage</b>.',
           changeTextSize: 'The function to update the textSize css and change the font-size properties from all html elements.',
-          changeTheme: 'The function to update the theme css and change the colors properties from all html elements.',
+          changeTheme: 'The function to update the theme css and change the color properties from all html elements.',
           backupData: 'The function to get the temporary zip file in /tmp with all json files generated from server side and open the download window in the Browser.',
           getSystemConfig: 'The function to get the system configuration from server side and update the variable <b>systemConfig</b>.',
           send: 'The function to send any data to the server side that receives the name of the listening in server side, the data(arg) to send, an expected result string and maybe a function to execute later. The function shows an alert using the function <span class="text-success"><b>alertBox</b></span> if the result string from server side is not "emptyinserted" and execute the functions <span class="text-success"><b>sheetPanel.close</b></span> and <span class="text-success"><b>mainMenu.defaultMenu</b></span> if the result string is the expected value to close the main panel and set the main menu to default buttons and finally execute the callback function if it was received.',
-          get: 'The function used to get some data from server side that receives the name of the listening in server side, the argument to choose a data and maybe a function to execute later. If the result from server side is empty It removes the main panel and execute the function <span class="text-success"><b>mainMenu.defaultMenu</b></span> to set the main menu to defaults buttons and finally execute the callback function if it was received.',
-          showSheetPanel: 'A function that receives an HTML element with the ID as a dataType to send to the function <span class="text-success"><b>sheetPanel.showPanel</b></span> to open the main panel to manage the sheets of the clicked item menu type and uses the function <span class="text-success"><b>mainMenu.hideItems</b></span> to hide all buttons from the main menu and shows the "update" and "cancel" buttons.',
-          showVariableStocks: 'A function that uses the function <span class="text-success"><b>mainMenu.hideItems</b></span> to hide all buttons from the main menu and <span class="text-success"><b>variableStocks.show</b></span> to show the panel to manage the sheets of variable stocks data and shows the "update" and "cancel" buttons.',
-          showReports: 'A function that uses the function <span class="text-success"><b>mainMenu.hideItems</b></span> to hide all buttons from the main menu and <span class="text-success"><b>reports.showReport</b></span> to show the panel to view a report and shows the "close" button.',
+          get: 'The function used to get some data from server side that receives the name of the listening in server side, the argument to choose a data and maybe a function to execute later. If the result from server side is empty it removes the main panel and execute the function <span class="text-success"><b>mainMenu.defaultMenu</b></span> to set the main menu to defaults buttons and finally execute the callback function if it was received.',
+          showSheetPanel: 'A function that receives an HTML element with the attribute ID as a <b>dataID</b> to send to the function <span class="text-success"><b>sheetPanel.showPanel</b></span> to open the main panel to manage the sheets of the clicked item menu and uses the function <span class="text-success"><b>mainMenu.hideItems</b></span> to hide all buttons from the main menu and shows the "update" and "cancel" buttons.',
+          showReports: 'A function that receives an HTML element with the attribute ID as a <b>reportID</b> to send to the function <span class="text-success"><b>reports.showReport</b></span> to open the main panel to view a report and uses the function <span class="text-success"><b>mainMenu.hideItems</b></span> to hide all buttons from the main menu and shows the "close" button.',
           mainMenuFunctions: 'A function that sets the default behavior of the main menu buttons. Actually it sets the close button to confirm if the user wants to close if the sheet panel is open preventing from data lost and later removes the panel and update the page title to the app title. It also sets the about button to open the about message.'
         },
         events: {
@@ -215,20 +213,20 @@
       var sheetPanel = {
         requiredBy: 'View/index.ts to open, close and save sheet dataSets. It opens the main panel and load the sheet tabs.',
         abstract: 'A module used to open the main panel and show all the tabs of a DataSet and open the last sheetTab used.',
-        constants: {sheetsData: 'The module DataConfig/sheetsData.ts used to get the configured sheets.'},
+        constants: {sheetsData: 'The module DataConfig/sheetData.ts used to get the configured sheets.'},
         functions: {
-          createPanel: 'A function used to create the painel and get the sheet dataSet using the function <span class="text-success"><b>get</b></span> and the listening "get-data" to use the selected year in tha tabs module.',
+          createPanel: 'A function used to create the painel and get the sheet dataSet using the function <span class="text-success"><b>get</b></span> and the listening "get-data" to use the selected year in the tabs module.',
           showCopyEntries: 'A function used to show the copy entries elements in case of a selected empty year.',
-          copyEntries: 'A function used to copy all the configured entries in sheet row title to an empty year.',
-          changeYear: 'A function used when changing the year updating the active tab dataset and loading the tabs module with the selected year tabs using the function <span class="text-success"><b>tabs.showTabs</b></span>.',
+          copyEntries: 'A function used to copy all the configured entries in sheet row title from a filled year to an empty year.',
+          changeYear: 'A function used when changing the year loading the tabs module with the selected year tabs using the function <span class="text-success"><b>tabs.showTabs</b></span> and updating the active tab dataset.',
         },
         exports: {
-          tabs: 'The module View/tabs.ts to manage the tabs of the selected year dataSet.',
+          tabs: 'The module View/ITEMS/tabs.ts to manage the tabs of the selected year dataSet.',
           dataID: 'A string to save the current sheet data ID being used.',
           dataSetYears: 'An object to save all the dataSet of a configured sheet.',
           selectEntries: 'An array used to save all the entries to be shown in a select in case of the row title has <b>foreignEntries</b> configured.',
           save: 'A function to save the current dataSet using the function <span class="text-success"><b>send</b></span> and the listening "save-data".',
-          close: 'A function to close the main panel and reset some tabs and sheets configurations.',
+          close: 'A function to close the main panel and reset some tab and sheet settings.',
           showPanel: 'A function to load the sheet data configuration and create the main panel using the function <span class="text-success"><b>createPanel</b></span>.',
           updateYearDataSet: 'A function used before saving the dataSet or changing the year to update the dataSet using the function <span class="text-success"><b>sheet.updateData</b></span>',
           updateRowTitle: 'A function used when changing the year to update the select options according to the entries of the selected year.',
@@ -245,7 +243,7 @@
         },
         constants: {
           mySheet: 'The View/ITEMS/sheet.ts module used to show the report of type "sheet".',
-          reportsData: 'The DataConfig/reportsData.ts module used to get the reports configuration.',
+          reportsData: 'The DataConfig/reportData.ts module used to get the reports configuration.',
           createField: 'The function <span class="text-success"><b>createField</b></span> of the View/ITEMS/sheetField.ts module.',
         },
         exports: {
@@ -255,19 +253,18 @@
           'updatePrintImage()': 'A function used to update the image of the Download button after a change in the report.'
         },
         functions: {
-          showReportObjects: 'Receives the report configuration object and get the report dataSets using the function <span class="text-success"><b>get</b></span> and the listening "get-data" and inserts the data selectors using the function <span class="text-success"><b>createSelectors</b></span> and inserts the report according to It\'s type using the functions <span class="text-success"><b>showSheet</b></span>, <span class="text-success"><b>getTableData</b></span> and <span class="text-success"><b>getChartJSDataSets</b></span>.',
+          showReportObjects: 'Receives the report configuration object and get the report dataSets using the function <span class="text-success"><b>get</b></span> and the listening "get-data" and inserts the data selectors using the function <span class="text-success"><b>createSelectors</b></span> and inserts the report according to its type using the functions <span class="text-success"><b>showSheet</b></span>, <span class="text-success"><b>getTableData</b></span> and <span class="text-success"><b>getChartJSDataSets</b></span>.',
           updatePeriod: 'Receives the period report object and the selector dataset object to update the <b>startDate</b> and <b>endDate</b> replacing the strings "{year}", "{year++}", "{year--}", "{month}", "{month++}" or "{month--}" using the actual year or month dates;',
           createSelectors: 'Receives an array of strings to insert the report data selectors and each string may be "year" to enable the user to select a year, "period" to enable the user to select the <b>startDate</b> and <b>endDate</b>, "datasets/tabs" to enable the user to select each dataSet and/or tab to show, "tabs" to enable the user to select the tabs to show, "groupbyperiod" to enable the user to group the selected date by the periods "bimester/quarter/semester/year", "groupbydata" to enable the user to group the selected data by some values "firstValue/tabs/dataSets", "stack?" to enable the user to stack the data in case of the report type "bar" or "line", "total" to enable the user to show the total sum for each collumn of the row data.',
           showSheet: 'Receives the sheet configuration (selector, data, labels, title, previewValues) to show the report of type "sheet" using the module View/ITEMS/sheet.ts.',
           getChartJSDataSets: 'Receives the report configuration variables and transforms the dataSets into the Chart data in case of the report type is "doughnut", "pie", "bar" or "line".',
           getTableData: 'Receives the report configuration variables and transforms the dataSets into the table data to be used by the function <span class="text-success"><b>showTable</b></span>.',
           showChartJS: 'Receives the report configuration variables and shows the ChartJS graph in case of report type is "doughnut", "pie", "bar" or "line".',
-          showReportPreview: 'Receives the preview values and shows the preview ballon on passing the mouse point over a sheet cell in case of report type is "sheet".',
+          showReportPreview: 'Receives the preview values and shows the preview ballon on passing the mouse pointer over a sheet cell in case of report type is "sheet".',
           randomLightColor: 'Receives a number and returns a random light hexadecimal RGB color to be used in the chartJS graphs in case of reaching the limit of the <b>backgroundColors</b>.',
           showTable: 'Receives a table data and creates the table elements in the report panel.',
           'window.getLastMonth': 'Receives the report selected data and slices remaining only the first collumn and the last collumn with value not empty.',
           'window.getRemainderDataSet': 'Receives the report selected data of incomes and expenses dataSets and gets the result difference creating the remainder dataSet in the data.',
-          'window.getLastYearQty': 'Receives the report selected data which must containg only the December month of the year prior to the selected one and the January month of the selected year to calculate the total value using the december quantity and the january price in case of the "variableStocks" dataSet.',
           showDownload: 'Receives the strings filename and orientation to create the Download button in the Main Menu.'
         },
         events: {
@@ -279,10 +276,10 @@
         abstract: 'A configuration page that was used to change between MongoDB or local files to save data and to change admin password. No longer being used.'
       }
       var tabs = {requiredBy: 'View/sheetPanel.ts to show the sheet tabs and to open the sheet.',
-        abstract: 'A module that shows all sheet tabs of a dataSet to open the sheet using the module View/sheet.ts.',
+        abstract: 'A module that shows all sheet tabs of a dataSet and opens the active sheet using the module View/sheet.ts.',
         functions: {
           listTabs: 'Receives a variable place as an html object and shows  inside the object all the sheet tab buttons reading the sheet dataSet.',
-          createEmptyTab: 'Creates a new tab data and shows the new empty sheet.',
+          createEmptyTab: 'Creates a new tab data and shows the new empty sheet and the new tab button.',
           changeTab: 'Receives the sheet tab button as an html object and updates the active tab dataset and changes to another tab.',
           showInputNameTab: 'Receives the tab number and inserts the input html element inside the sheet tab button.',
           deleteTab: 'Receives the tab number and opens a confirmation box to confirm the deletion and runs all the functions in the array <b>deleteTabRules</b> and finally may delete the tab.',
@@ -292,22 +289,22 @@
           dataSet: 'An object containg all the tabs data of a sheet dataSet.',
           sheet: 'The module View/sheet.ts to show all the sheet data.',
           'showTabs(place)': 'A function that receives the variable place as an HTML object and inserts the sheet inside the object.',
-          deleteTabRules: 'An array of functions to verify if the tab may be deleted. Each function must return a boolean variable of value "true" in case case of it was allowed by a function. In case of all the functions returns "true" the tab will be deleted.',
+          deleteTabRules: 'An array of functions to verify if the tab may be deleted. Each function must return a boolean variable of value "true" in case case of it was allowed to delete the tab. In case of all the functions returns "true" the tab will be deleted.',
         },
         events: {
           'body.on("mousedown")': 'Used to close the menu if a right mouse button was pressed in a sheet tab button or remove the input when changing the tab name and the user clicks outside the sheet tab button.'
         }
       }
       var mainMenu = {requiredBy: 'View/index.ts to show the top main menu of the page.',
-        abstract: 'A module that simply creates the main menu bar at the top of the page and inserts the buttons of a configuration saved in It\'s variable <b>menuItems</b>.',
+        abstract: 'A module that simply creates the main menu bar at the top of the page and inserts the buttons of a configuration saved in its variable <b>menuItems</b>.',
         functions: {
           insertButtonMenu: 'Receives a menu item configuration of type "button" and inserts a simple button in the main menu.',
           closeSubMenus: 'Closes all the subMenus that maybe is open.',
-          insertDropdownMenu: 'Receives a menu item configuration of type "menu" and inserts the dropdown menu button and It\'s possible subMenus.',
+          insertDropdownMenu: 'Receives a menu item configuration of type "menu" and inserts the dropdown menu button and its possible subMenus.',
           updateTitle: 'Receives the triggered menu item and updates the window title and shows the item title at the center of the main menu bar using the variable <b>menuTitle</b> of the configured data button saved in the attribute "data-title" of the button.'
         },
         exports: {
-          menuItems: 'An array of objects within the buttons configuration as described in DataConfig/buttonsData.ts.',
+          menuItems: 'An array of objects containing the button configuration as described in DataConfig/buttonData.ts.',
           'create()': 'A function that creates the main menu bar at the top of the window and inserts the buttons using the functions <span class="text-success"><b>insertButtonMenu</b></span> and <span class="text-success"><b>insertDropdownMenu</b></span>.',
           'defaultMenu()': 'A function that hides the menu buttons and shows only the start menu buttons (configured data buttons and left position buttons).',
           'hideItems()': 'A function that hide all the buttons of the main menu except for the left position buttons.',
@@ -321,8 +318,6 @@
           shortKeys: 'Used to setup the main menu buttons/items short keys. The shortKeys object must contain a short key as the key index to another object (e.g. <span class="text-primary">{<b>"CTRL+ALT+T"</b>: {<b>id</b>: "itemID", <b>dropdown</b>: true}}</span>). {ul=shortKeys}'
         },
         functions: {
-          'window.on("resize")': 'Used to update the box size when changing the browser window size.',
-          'document.on("keydown")': 'Used to trigger some elements when pressing a key like ESC, ENTER, ARROWS and some short keys.',
           navigationMenu: 'Receives a dropdown menu keydown event to handle the dropdown subMenus in case of a key Arrow or Enter is pressed or handle a dropdown item in case of a key Enter is pressed.',
           boxSize: 'Sets the box size at the center of the browser window.'
         },
@@ -333,7 +328,8 @@
           'listLanguages(place, callback)': 'A function that receives the variable place as the html element to insert the language items and a callback to execute a function after creating all elements. It uses the channel "list-languages" to get the language descriptions.'
         },
         events: {
-          'window.on("resize")': 'Used to update the box size and adjust the page title position in the main menu and the panel height.'
+          'window.on("resize")': 'Used to update the box size and adjust the page title position in the main menu and the panel height.',
+          'document.on("keydown")': 'Used to trigger some elements when pressing a key like ESC, ENTER, ARROWS and some short keys.',
         },
         'ul-shortKeys': { title: 'The shortkeys object variables are:', li: [
           {title: 'id', desc: 'A string as the item menu ID to set the keydown listening or trigger a click event.'},
@@ -341,7 +337,7 @@
         ]}
       }
       var sheet = {
-        requiredBy: 'View/reports.ts to show the sheet report type and View/ITEMS/tabs.ts open show the sheet.',
+        requiredBy: 'View/reports.ts to show the sheet report type and View/ITEMS/tabs.ts to show the sheet.',
         abstract: 'A module used to show the sheet and load the sheet data and manage the cells and rows.',
         constants: {
           sheetField: 'The module View/ITEMS/sheetField.ts used to create and manage the sheet field cells.',
@@ -349,21 +345,19 @@
           rightClickMenu: 'The module View/ITEMS/rightClickMenu.ts used to open a menu at the mouse pointer position when pressing the right click mouse button.'
         },
         functions: {
-          'window.on("resize")': 'Used to update the comment dot position when changing the window size.',
-          'body.on("mousedown")': 'Used to close the comment ballon or right click menu when clicking outside.',
-          updateFieldValue: 'Verify if its possible to change using the function <span class="text-success"><b>changeFieldRule</b></span> and updates the cell value in the <b>dataSet</b> variable and updates the right statistics, bottom statistics and foot lines in case of a field type "money", "float" or "integer".',
+          updateFieldValue: 'Verify if it\'s possible to change using the function <span class="text-success"><b>changeFieldRule</b></span> and updates the cell value in the <b>dataSet</b> variable and updates the right statistics, bottom statistics and foot lines in case of a field type "money", "float" or "integer".',
           convertMaskLanguage: 'Changes the currency of the sheet row and updates every sheet cell of the row using the function <span class="text-success"><b>sheetField.updateVal</b></span>',
           makeid: 'Creates a 24 caracters string used to save a row ID inside the <b>dataSet</b> variable.',
           'verifyRowData(rowData)': 'Receives the rowData as an array of sheet cell objects and is used by the function <span class="text-success"><b>insertRow</b></span> to create every <b>dataSet</b> variable needed by a row in case of missing (e.g. a change in the row title data configuration) and creates a new empty table row in case of the given rowData is empty.',
-          'showCommentBallon(cellId)': 'Receives the string cell ID and opens a comment ballon right after the sheet cell to insert/change a comment in the cell.',
-          closeCommentBallon: 'Closes the comment ballon and updates the respective cell inserting/changing the variable <b>comment</b> in the cell. It also shows/removes the comment dot if the comment is empty or has a value.',
+          'showCommentBallon(cellId)': 'Receives the string cell ID and opens a comment ballon right after the sheet cell to insert or change a comment in the cell.',
+          closeCommentBallon: 'Closes the comment ballon and updates the respective cell inserting or changing the variable <b>comment</b> in the cell. It also shows the comment dot if the comment has a value or removes the dot if the comment is empty.',
           'insertRow(rowData)': 'Used to create a new table sheet row at the last position reading the given rowData variable as the row in the <b>dataSet</b> variable. Creates a new row dataSet configuration in case of the given rowData is empty. It inserts a sheet field in every sheet cell of a possible user data using the function <span class="text-success"><b>sheetField.createField</b></span> and sets the field short keys using the function <span class="text-success"><b>setSheetKeys</b></span>.',
           'insertRowBelowAbove(id, line)': 'Receives the id as the click menu item id ("insertRowBelow" or "insertRowAbove") and the line number to first insert a new row in the sheet and later update the sheet row position and the <b>dataSet</b> variable according to the given line number.',
           'deleteRow(number)': 'Creates a confirm box to verify if the user really wants to delete the row and later runs every function in the <b>deleteRowRules</b> array to verify if every function returns "true" and then if the user confirms and all function results are "true" it deletes the table sheet row and updates the <b>dataSet</b> variable.',
           'updateDataSet(order?)': 'Receives a possible array of row IDs to update the row positions in the <b>dataSet</b> variable and reads all sheet fields to update every sheet cell object inside the <b>dataSet</b> variable and finally updates the right and bottom statistics.',
           updateRows: 'Used to realocate the bottom statistic and foot line rows at the right position and to update every row color adding/removing the "odd_line" css class to make a discrepancy between the lines.',
           'sortSheet(cellID, invert)': 'Receives the string cell ID as row title cell to be used as the collumn to order all the sheet data and a boolean variable invert to maybe invert the order (set descending) in case of "true". The default order is ascending.',
-          setSheetKeys: 'Used to insert the sheet field keys when changing a field sheet value like pressing the ENTER, ARROWS or TAB keys and inserts the right click menu when clicking in the cell with the right mouse button.',
+          setSheetKeys: 'Used to insert the sheet field key event when changing a field sheet value like pressing the ENTER, ARROWS or TAB keys and inserts the right click menu when clicking in the cell with the right mouse button.',
           'updateStats(textbox)': 'Receives the textbox as an input or textarea element inside the sheet field cell to update the right and/or bottom statistics of the field row/collumn using the function <span class="text-success"><b>changeStatsValue</b></span>.',
           changeStatsValue: 'Receives some sheet field variables to update a sheet field of a right statistic or bottom statistic of the sheet.',
           createRightStats: 'Creates the right statistics for each line in the sheet if the <b>enableRightStats</b> variable is set to "true".',
@@ -381,7 +375,7 @@
           enableBottomStats: 'A boolean variable that if is "true" the sum and average of field types "money", "integer" and "float" of each collumn will be created.',
           'showSheet(place)': 'A function that receives a place variable as an HTML element to create the table sheet and put inside the place. It creates the table title row including the sort features using the function <span class="text-success"><b>sortSheet</b></span> and inserts a row using the function <span class="text-success"><b>insertRow</b></span> for each row saved in the <b>dataSet</b> variable. It also creates the right statistics, bottom statistics and foot lines using the functions <span class="text-success"><b>createRightStats</b></span>, <span class="text-success"><b>createBottomStats</b></span> and <span class="text-success"><b>updateFootLines</b></span>. Finally it creates the sheet short keys using the function <span class="text-success"><b>setSheetKeys</b></span> and executes the function <span class="text-success"><b>afterShow</b></span>.',
           'afterShow()': 'An optional function that may be executed after showing the sheet table usually to modify the sheet elements.',
-          'updateFootLines()': 'A function that creates/updates a foot line in the sheet for each item saved in the <b>footLines</b> variable using the function <span class="text-success"><b>insertFootLine</b></span>.',
+          'updateFootLines()': 'A function that creates or updates a foot line in the sheet for each item saved in the <b>footLines</b> variable using the function <span class="text-success"><b>insertFootLine</b></span>.',
           'updateDotPosition()': 'A function that calculates the correct position of each comment dot in the sheet (e.g. when changing the window size or changing a field size).',
           'openSubValues(cellID)': 'A function that receives a string as the cell ID and shows the subValue ballon right after the sheet cell using the function <span class="text-success"><b>subValues.showSubValues</b></span> and later when closing the ballon it saves all the sub values in a variable <b>subValues</b> in the cell.',
           'updateData()': 'A function used to read all the sheet cells and update the <b>dataSet</b> variable using the function <span class="text-success"><b>updateDataSet</b></span>.',
@@ -401,7 +395,7 @@
           {title: 'subValues?', desc: 'An array of subValue objects to save many variables in a single cell.'},
         ]},
         'ul-rowTitle': {'title': 'The row title configuration object has the following variables: ', li: [
-          {title: 'title', desc: 'A string as the row title to be shown in the table header;'},
+          {title: 'title', desc: 'A string as the title to be shown in the table header;'},
           {title: 'type', desc: 'A string as the type of value the field may be. The type may be "text" to enable any caracter or "alphanumeric" to allow only letters and numbers or "letters" to allow only letters or "integer" to allow only integer numbers or "float" to allow a number or "money" to allow a number and convert to a money mask or "date" to allow only date values with a specific mask (e.g. MM/DD/YY) or "select" to allow a set of options;'},
           {title: 'items?', desc: 'An optional array of objects to specify the options set in case of field type "select" (e.g. <span class="text-primary">[ {<b>name</b>: "myFieldText1", <b>value</b>: "value1"}, {<b>name</b>: "myFieldText2", <b>value</b>: "value2"} ]</span>). The variable <b>name</b> is used to specify the text to be shown in the option and the variable <b>value</b> is the field value to be saved when choosing the option;'},
           {title: 'classes?', desc: 'An optional array of strings to add a class name for each string that may be used to format the field collumn (e.g. the class "first" is used to set the first field collumn width as 300px);'},
@@ -417,9 +411,9 @@
       }
       var subValues = {
         requiredBy: 'View/ITEMS/sheet.ts to open and manage the subvalues of a cell.',
-        abstract: 'A module that opens a subValue ballon next to the cell to insert/update the subValues(variables) of the cell.',
+        abstract: 'A module that opens a subValue ballon next to the cell to insert or update the subValues(variables) of the cell.',
         constants: {
-          sheetField: 'The module View/ITEMS/sheetField.ts to insert the fields inside the sheet.'
+          sheetField: 'The module View/ITEMS/sheetField.ts to insert the fields inside the ballon.'
         },
         functions: {
           closeSubValues: 'Closes the subValue ballon updating the <b>subValues</b> object of this module.',
@@ -432,19 +426,19 @@
           fields: 'An array of objects used to save the fields of a subValues configuration. {ul=fields}',
           subValues: 'An array of the subValues saved or to be saved in a sheet cell.',
           'onClose()': 'A function to be executed when closing the subValue ballon (e.g. a function to update the sheet field value or insert/modify some varibles in the cell according to the subValues saved).',
-          'onShowSubValue()': 'A function to be executed when showing the subValue ballon (e.g. a function to enable/disable the fields according to a field value).',
+          'onShowSubValue()': 'A function to be executed when showing the subValue ballon (e.g. a function to enable or disable the fields according to a field value).',
           'showSubValues(cellID)': 'A function that receives the cell ID to show the subValue ballon next to the cell according to the <b>fields</b> variable and loads the variables of <b>subValues</b> or creates an empty subValues object.',
         },
         events: {
           'body.on("mousedown")': 'Used to close the subValue ballon if the user clicks outside the ballon.'
         },
-        'ul-fields': {title: 'The fields variables are:', li: [
+        'ul-fields': {title: 'The <b>fields</b> object variables are:', li: [
           {title: 'name', desc: 'A string as the name of the field that will be used as the variable name inside the object <b>subValues</b> of the cell;'},
           {title: 'type', desc: 'A string as the type of the field to be used by the View/ITEMS/sheetField.ts to create a sheet field;'},
-          {title: 'title', desc: 'A string as the title text to be shown in she subValue ballon;'},
+          {title: 'title', desc: 'A string as the title text to be shown in the subValue ballon;'},
           {title: 'default?', desc: 'A default value of the sheet field used in case of a type "select";'},
-          {title: 'values?', desc: 'An array of objects whitin the possible values (options) of a sheet field in case of a type "select" (e.g. <span class="text-primary">{<b>name</b>: "myFieldName", <b>value</b>: "myFieldValue"}</span>). The variable <b>name</b> is the text to be shown in the option and the variable <b>value</b> is the value of the field to be saved in case of the option is selected;'},
-          {title: 'onChange?', desc: 'A function to be executed when the select option is changed (e.g. a function to modify the fields setting enable/disable;'},
+          {title: 'values?', desc: 'An array of objects containg the possible values (options) of a sheet field in case of a type "select" (e.g. <span class="text-primary">{<b>name</b>: "myFieldName", <b>value</b>: "myFieldValue"}</span>). The variable <b>name</b> is the text to be shown in the option and the variable <b>value</b> is the value of the field to be saved in case of the option is selected;'},
+          {title: 'onChange?', desc: 'A function to be executed when the select option is changed (e.g. a function to modify the field settings to enable or disable;'},
         ]}
       }
       var sheetField = {
@@ -480,7 +474,7 @@
         exports: {
           menuItems: 'An array of menu item objects to show inside the menu. {ul=menuItems}',
           'showMenu(id, datavalue)': 'A function that receives the strings id as a menu id and datavalue as a value usually used to save the element which will be used in a function when a item menu is triggered (e.g tab number, row number, cell id).',
-          'close(id)': 'A function that receives a string as the menu id and removes from the page.'
+          'close(id)': 'A function that receives a string as the menu id and removes the menu from the page.'
         },
         events: {
           'body.on("mousemove")': 'Used to update the variables of the mouse pointer position.'
@@ -499,38 +493,38 @@
         abstract: 'A module that simply contains the menu configuration of buttons and dropdown menus to be created in the main menu and returns the menu configuration.',
         exports: {buttons: 'An array of objects to insert the menu buttons. <br> Each object may be of type "button" to show a simple button (e.g. <span class="text-primary">{<b>type</b>: "button", <b>id</b>: "dataID", <b>title</b>: "CTRL+R", <b>text</b>: "register", <b>menuTitle</b>: "registrationpage", <b>panel</b>: "sheetData"}</span>). {ul=button} <br> Also each object may be of type "menu" to show a dropdown menu button (e.g. <span class="text-primary">{<b>type</b>: "menu", <b>title</b>: "CTRL+M", <b>text</b>: "menutext", <b>items</b>: []}</span>). {ul=menu} {ul=submenu}'},
         'ul-button': {title: 'The button object variables are: ', li: [
-          {title: 'type', desc: 'If It\'s a simple button or a dropdown menu button and in this case is "button";'},
-          {title: 'title', desc: 'The button title to explain something about the button. Currently It\'s being used to describe the short keys. It must follow the pattern <span class="text-primary">"CTRL+KEY"</span> or <span class="text-primary">"ALT+SHIFT+KEY"</span> to be used by the View/ITEMS/UI.ts module to setup the short key;'},
+          {title: 'type', desc: 'If it\'s a simple button or a dropdown menu button and in this case is "button";'},
+          {title: 'title', desc: 'The button title to explain something about the button. Currently it\'s being used to describe the short keys. It must follow the pattern <span class="text-primary">"CTRL+KEY"</span> or <span class="text-primary">"ALT+SHIFT+KEY"</span> to be used by the View/ITEMS/UI.ts module to setup the short key;'},
           {title: 'text', desc: 'The text to show in the button. It must be a string registered in the <span class="text-danger">languages.json</span> file;'},
           {title: 'menuTitle', desc: 'The title of the panel to show in the App title and in the middle of the main menu. It must be a string registered in the <span class="text-danger">languages.json</span> file;'},
           {title: 'panel', desc: 'The type of panel the button will show. It may be "sheetData" to show a sheet panel to manage data or may be "reports" to show a report panel to select/view a report data;'},
-          {title: 'id', desc: 'The type of data the sheet panel or report panel will show. This id must be registered later in the module DataConfig/sheetsD.ts in case of a sheet data or DataConfig/reportsData.ts in case of a report data.'},
+          {title: 'id', desc: 'The type of data the sheet panel or report panel will show. This id must be registered later in the module DataConfig/sheetData.ts in case of a sheet data or DataConfig/reportData.ts in case of a report data.'},
         ]},
         'ul-menu': {title: 'The dropdown menu button object variables are: ', li: [
-          {title: 'type', desc: 'If It\'s a simple button or a dropdown menu button and in this case is "menu";'},
-          {title: 'title', desc: 'The button title to explain something about the button. Currently It\'s being used to describe the short keys;'},
+          {title: 'type', desc: 'If it\'s a simple button or a dropdown menu button and in this case is "menu";'},
+          {title: 'title', desc: 'The button title to explain something about the button. Currently it\'s being used to describe the short keys. It must follow the pattern <span class="text-primary">"CTRL+KEY"</span> or <span class="text-primary">"CTRL+ALT+KEY"</span> to be used by the View/ITEMS/UI.ts module to setup the short key;'},
           {title: 'text', desc: 'The text to show in the button. It must be a string registered in the <span class="text-danger">languages.json</span> file;'},
           {title: 'items', desc: 'The menu items to show in the dropdown menu. Each menu item may be a simple link to open a panel (e.g. <span class="text-primary">{<b>id</b>: "dataID", <b>text</b>: "itemText", <b>menuTitle</b>: "myTitle", <b>panel</b>: "sheetData"}</span>) and is the same object as a simple button except you don\'t need the <b>type</b> "button" anymore. Each menu item may also be a submenu (e.g. <span class="text-primary">{<b>submenu</b>: true, <b>text</b>: "itemText", <b>items</b>: []}</span>).'},
         ]},
         'ul-submenu': {title: 'The dropdown submenu object variables are: ', li: [
-          {title: 'submenu', desc: 'A boolean variable to determine if It\'s a submenu item. In this case must be "true";'},
+          {title: 'submenu', desc: 'A boolean variable to determine if it\'s a submenu item. In this case must be "true";'},
           {title: 'text', desc: 'The text to show in the menu item. It must be a string registered in the <span class="text-danger">languages.json</span> file;'},
           {title: 'items', desc: 'The submenu items to show in the dropdown submenu. Each submenu item is a simple link to open a panel (e.g. <span class="text-primary">{<b>id</b>: "dataID", <b>text</b>: "itemText", <b>menuTitle</b>: "myTitle", <b>panel</b>: "sheetData"}</span>) and is the same object as a simple button except you don\'t need the <b>type</b> "button" anymore.'},
         ]}
       }
 
       var sheetCFG = {
-        requiredBy: 'View/sheetPanel.ts to get the configured sheet data headers, footers, etc.',
-        abstract: 'A module that must contain an object for each <b>ID</b> registered in the buttons data (named also <b>dataID</b>) when the variable <b>panel</b> is set to "sheetData" to load the corresponding sheet data config.',
+        requiredBy: 'View/sheetPanel.ts to get the configured sheet data row titles, footlines, etc.',
+        abstract: 'A module that must contain an object for each <b>ID</b> registered in the DataConfig/buttonData.ts (named also <b>dataID</b>) when the variable <b>panel</b> is set to "sheetData" to load the corresponding sheet data configuration.',
         constants: {months: 'An array os strings used to load the sheet month titles.'},
-        exports: {' "dataID" ': 'An object exported in the module for each id of a item with variable <b>panel</b> set to "sheetData". Every object is a sheet data id registered in the DataConfig/buttonsData.ts and must be a function that receives the module sheet and will return the object of a sheet configuration. {ul=sheetConfig} {ul=rowTitle} {ul=subValue} {ul=subValueField} {ul=footLines}'},
+        exports: {' "dataID" ': 'An object exported in the module for each id of a item with variable <b>panel</b> set to "sheetData". Every object is a sheet data id registered in the DataConfig/buttonData.ts and must be a function that receives the module sheet and will return the object of a sheet configuration. {ul=sheetConfig} {ul=rowTitle} {ul=subValue} {ul=subValueField} {ul=footLines}'},
         'ul-sheetConfig': {title: 'The sheet configuration (object of each <b>dataID</b>) variables are:', li:[
           {title: 'rowTitle', desc: 'An array of sheet title objects to define the type of field for each collumn (e.g. <span class="text-primary">[ {<b>title</b>: "myText", <b>type</b>: "text", <b>entry</b>: true}, {<b>title</b>: "myNumber", <b>type</b>: "float"} ]</span>);'},
           {title: 'footLines?', desc: 'An optional array of the foot lines to show the sum of a variable cell below the sheet rows (e.g. <span class="text-primary">[ {<b>title</b>: "myTitle1", <b>field</b>: "myField1"}, {<b>title</b>: "myTitle2", <b>field</b>: "myField2"} ]</span>);'},
           {title: 'enableRightStats?', desc: 'An optional boolean variable that if is "true" will enable the right statistics for each line of the sheet including the sum and average of the fields of type "float", "integer" or "money". The default is "true";'},
           {title: 'enableBottomStats?', desc: 'An optional boolean variable that if is "true" will enable the bottom statistics for each collumn   of the sheet including the sum and average of the fields of type "float", "integer" or "money". The default is "true";'},
-          {title: 'afterPanelLoad?', desc: 'An optional function for more advanced configurations that may be used to create some modifications in the panel after It\'s loaded (e.g. to insert some items in the panel);'},
-          {title: 'afterSheetLoad?', desc: 'An optional function for more advanced configurations that may be used to create some modifications in the sheet after It\'s loaded (e.g. to verify some sheet values and perform some operations).'}
+          {title: 'afterPanelLoad?', desc: 'An optional function for more advanced configurations that may be used to create some modifications in the panel after it\'s loaded (e.g. to insert some items in the panel);'},
+          {title: 'afterSheetLoad?', desc: 'An optional function for more advanced configurations that may be used to create some modifications in the sheet after it\'s loaded (e.g. to verify some sheet values and perform some operations).'}
         ]},
         'ul-rowTitle': {title: 'The row title (object to be included in variable <b>rowTitle</b> of a sheet data) variables are:', li:[
           {title: 'title', desc: 'A string as the row title to be shown in the table header. It must be a string registered in <span class="text-danger">languages.json</span> file;'},
@@ -542,7 +536,7 @@
           {title: 'readonly?', desc: 'An optional boolean variable that if is "true" the field value may not be changed by the user and will only be changed by a system function (e.g. when closing a subValue). The comment and subValue functions are still avaiable;'},
           {title: 'disabled?', desc: 'An optional boolean variable that if is "true" nothing in the field may be changed;'},
           {title: 'subValues?', desc: 'An optional object of subValues for more complex sheet data management inserting many possible values inside a single cell (e.g. <span class="text-primary">{<b>title</b>: "changeText", <b>fields</b>: [], <b>onClose</b>: function(){}}</span>).'},
-          {title: 'month', desc: 'A number used to set the default month date in case of a subValue field of type "date".'}
+          {title: 'month?', desc: 'An optional number used to set the default month date in case of a subValue field of type "date".'}
         ]},
         'ul-subValue': {title: 'The subValues cell (object to be included in <b>subValues</b> of a row title) variables are:', li:[
           {title: 'title', desc: 'A string as the option text to be shown on a right click in a cell. It must be a string registered in <span class="text-danger">languages.json</span> file;'},
@@ -556,7 +550,7 @@
           {title: 'type', desc: 'The type of the field value and may be the same of the row title types "alphanumeric", "letters", "integer", "float", "date" or "select";'},
           {title: 'title', desc: 'The field title to be shown on the subValues ballon. It must be a string registered in <span class="text-danger">languages.json</span> file;'},
           {title: 'default?', desc: 'A string as an optional default value of the field in case of type "select";'},
-          {title: 'values?', desc: 'An array of the possible options to select in case of "select" type field (e.g. <span class="text-primary">[ {<b>name</b>: "myFieldText1", <b>value</b>: "value1"}, {<b>name</b>: "myFieldText2", <b>value</b>: "value2"} ]</span>). The variable <b>name</b> is the option text to be shown in the select and must be registered in <span class="text-danger">languages.json</span> file and the variable <b>value</b> is the value to be saved inside the <b>subValues</b> of the cell using the variable <b>name</b> of the subValues field cell object as the variable name when the option is selected;'},
+          {title: 'values?', desc: 'An array of the possible options to select in case of "select" type field (e.g. <span class="text-primary">[ {<b>name</b>: "myFieldText1", <b>value</b>: "value1"}, {<b>name</b>: "myFieldText2", <b>value</b>: "value2"} ]</span>). The variable <b>name</b> is the option text to be shown in the select and must be registered in <span class="text-danger">languages.json</span> file and the variable <b>value</b> is the value to be saved inside the <b>subValues</b> of the cell when the option is selected;'},
           {title: 'onChange?', desc: 'An optional function that may be used to apply some modifications in the subValues ballon when changing the option in case of a "select" type field.'},
         ]},
         'ul-footLines': {title: 'The foot lines (object to be included in <b>footLines</b> of a sheet data) variables are:', li:[
@@ -567,11 +561,11 @@
 
       var reportCFG = {
         requiredBy: 'View/reports.ts to get the configured report data panels.',
-        abstract: 'A module that must contain an object for each <b>ID</b> registered in the buttons data (named also <b>reportID</b>) when the variable <b>panel</b> is set to "reports" to load the corresponding report panel.',
-        exports: {' "reportID" ': 'An object exported in the module for each id of a item with variable <b>panel</b> set to "reports" registered in the DataConfig/buttonsData.ts. {ul=reportConfig} {ul=showSelectors} {ul=selectorDataSets} {ul=previewValues}'},
-        'ul-reportConfig': {title: 'The report configuration object of each <b>reportID</b> variables are:', li: [
+        abstract: 'A module that must contain an object for each <b>ID</b> registered in the DataConfig/buttonData.ts (named also <b>reportID</b>) when the variable <b>panel</b> is set to "reports" to load the corresponding report panel.',
+        exports: {' "reportID" ': 'An object exported in the module for each id of a item with variable <b>panel</b> set to "reports" registered in the DataConfig/buttonData.ts. {ul=reportConfig} {ul=showSelectors} {ul=selectorDataSets} {ul=previewValues}'},
+        'ul-reportConfig': {title: 'The report configuration object variables of each <b>reportID</b> are:', li: [
           {title: 'title', desc: 'A string as the report title that must be a string registered in <span class="text-danger">languages.json</span> file;'},
-          {title: 'showSelectors?', desc: 'An optional array of strings to show some possible data selectors;'},
+          {title: 'showSelectors?', desc: 'An optional array of strings to show some possible data selectors that may be "year", "period", "datasets/tabs", "tabs", "groupbyperiod", "groupbydata", "stack?" and "total";'},
           {title: 'type', desc: 'The report type that may be "bar", "line", "table", "sheet", "doughnut" or "pie";'},
           {title: 'registerTitle?', desc: 'An optional string as the first collumn title in case of the report type is "sheet" because it may join multiple datasets. It must be a string registered in <span class="text-danger">languages.json</span> file;'},
           {title: 'dataOperations?', desc: 'An optional function to modify the report data bedore showing;'},
@@ -590,7 +584,7 @@
           {title: 'total', desc: 'to show a total option to get the sum of all dataset collumns in a row.'},
         ]},
         'ul-selectorDataSets': {title: 'The <b>selectorDataSets</b> (object of the report configuration) variables are:', li:[
-          {title: 'dataSets', desc: 'An array of objects for each dataSet to be used in the report (e.g. <span class="text-primary">{<b>title</b>: "datsetTitle", <b>dataID</b>: "myDataSet"}</span>). The <b>title</b> must be a string registered in <span class="text-danger">languages.json</span> file and the <b>dataID</b> must be an object configured in the module DataConfig/buttonsData.ts;'},
+          {title: 'dataSets', desc: 'An array of objects for each dataSet to be used in the report (e.g. <span class="text-primary">{<b>title</b>: "datsetTitle", <b>dataID</b>: "myDataSet"}</span>). The <b>title</b> must be a string registered in <span class="text-danger">languages.json</span> file and the <b>dataID</b> must be an object configured in the module DataConfig/buttonData.ts;'},
           {title: 'groupData?', desc: 'An optional string that will be used in every dataSet and may be "firstValue" to group all the dataSets by the value of the first collumn of the sheet, "tabs" to group all the rows of a tab dataSet into a single row and finally "dataSets" to group all rows from multiple tabs of a dataSet into a single row;'},
           {title: 'showTotal?', desc: 'An optional boolean variable that if is "true" a total row will be created in every dataSet performing a sum in all rows for each collumn.'},
         ]},
@@ -606,18 +600,18 @@
         requiredBy: 'View/ITEMS/sheetField.ts to get the configured date formats and currency masks.',
         abstract: 'A module that simply returns the configured date formats and currency masks.',
         exports: {
-          dateFormats: 'An object containing all the possible language dates and It\'s date formats. Each object variable is a language as the key index and has a string value as the date format (e.g. <span class="text-primary">{"en-US": "mm/dd/yy"}</span>).',
-          masks: 'An object containing all the possible language currencies and It\'s mask and abbreviation. Each object variable is a language as the key index and has an object containing the variables <b>mask</b> and <b>abbreviation</b> (e.g. <span class="text-primary">{ "en-US": {<b>mask</b>: "$ {1,234.00}", <b>abbreviation</b>: "USD"} }</span>).'
+          dateFormats: 'An object containing all the possible language dates and its date formats. Each object variable is a language as the key index and has a string value as the date format (e.g. <span class="text-primary">{"en-US": "mm/dd/yy"}</span>).',
+          masks: 'An object containing all the possible language currencies and its mask and abbreviation. Each object variable is a language as the key index and has an object containing the variables <b>mask</b> and <b>abbreviation</b> (e.g. <span class="text-primary">{ "en-US": {<b>mask</b>: "$ {1,234.00}", <b>abbreviation</b>: "USD"} }</span>).'
         }
       }
 
       var ITEMS = {subfolder:true, 'tabs.ts': tabs, 'mainMenu.ts': mainMenu, 'UI.ts': ui, 'sheet.ts': sheet, 'subValues.ts': subValues, 'sheetField.ts': sheetField, 'rightClickMenu.ts': rightClickMenu}
 
-      var dataConfig = {folder:true, 'buttonsData.ts': buttonsMenuCFG, 'sheetsData.ts': sheetCFG, 'reportsData.ts': reportCFG, 'fieldsMask.ts': maskCFG}
+      var dataConfig = {folder:true, 'buttonData.ts': buttonsMenuCFG, 'sheetData.ts': sheetCFG, 'reportData.ts': reportCFG, 'fieldMasks.ts': maskCFG}
       var common = {folder:true, 'calc.ts': calc}
       var model = {folder:true, 'db.ts': db, 'localdb.ts': localdb, 'selector.ts': selector}
       var control = {folder:true, 'controls.ts': controls}
-      var view = {folder:true, 'index.ts': index, 'reports.ts': reports, 'sheetPanel.ts': sheetPanel, 'configurationPanel.ts': configurationPanel, 'ITEMS/': ITEMS}
+      var view = {folder:true, 'index.ts': index, 'sheetPanel.ts': sheetPanel, 'reports.ts': reports, 'configurationPanel.ts': configurationPanel, 'ITEMS/': ITEMS}
 
       var events = {
         abstract: 'Here are described some important function sequence flow when a user view interface event occurs.',
