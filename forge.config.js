@@ -13,12 +13,12 @@ module.exports = {
       config: {
         options: {
           maintainer: 'Italo Cruz de Brito',
-          homepage: 'https://github.com/italo2v/minhas-financas',
+          homepage: 'https://github.com/italo2v/my-custom-app',
           categories: ['Office'],
           genericName: 'My Finances',
           description: 'Control your finances like a professional!',
           icon: 'icon.png',
-          name: 'my-finances',
+          name: 'my-custom-app',
           section: 'Miscellaneous',
           version: '1.0.0'
         }
@@ -28,13 +28,13 @@ module.exports = {
       name: '@electron-forge/maker-rpm',
       config: {
         options: {
-          homepage: 'https://github.com/italo2v/minhas-financas',
+          homepage: 'https://github.com/italo2v/my-custom-app',
           categories: ['Office'],
           genericName: 'My Finances',
           productName: 'My Finances',
           description: 'Control your finances like a professional!',
           icon: 'icon.png',
-          name: 'my-finances',
+          name: 'my-custom-app',
           version: '1.0.0'
         }
       },
