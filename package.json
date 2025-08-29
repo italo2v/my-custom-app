@@ -13,9 +13,9 @@
     "start": "tsc | ./copyToDist.sh && electron-forge start",
     "package": "tsc | ./copyToDist.sh && electron-forge package",
     "make": "tsc | ./copyToDist.sh && electron-forge make",
-    "make-builder": "tsc | ./copyToDist.sh && electron-builder --prepackaged ./out/my-finances-linux-x64 --linux",
+    "make-builder": "tsc | ./copyToDist.sh && electron-builder --prepackaged ./out/my-custom-app-linux-x64 --linux",
     "build": "tsc | ./copyToDist.sh && electron-builder --win --x64 --linux",
-    "build-all": "tsc | ./copyToDist.sh && electron-forge make && electron-builder --prepackaged ./out/my-finances-linux-x64 --linux && electron-builder --win --x64",
+    "build-all": "tsc | ./copyToDist.sh && electron-forge make && electron-builder --prepackaged ./out/my-custom-app-linux-x64 --linux && electron-builder --win --x64",
     "publish": "electron-forge publish"
   },
   "postinstall": "electron-builder install-app-deps",
@@ -59,10 +59,6 @@
       ]
     },
     "win": {
-      "signtoolOptions": {
-        "certificateFile": "/media/SSD2/Development/selfsigncert.pfx",
-        "certificatePassword": "M1F1N4NC3S"
-      },
       "files": [
         "**/*",
         "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
