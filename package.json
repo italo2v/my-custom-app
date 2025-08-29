@@ -29,9 +29,9 @@
     "directories": {
       "output": "out/"
     },
-    "appId": "com.my-finances",
+    "appId": "com.my-custom-app",
     "asar": true,
-    "productName": "my-finances",
+    "productName": "my-custom-app",
     "linux": {
       "category": "Office",
       "files": [
