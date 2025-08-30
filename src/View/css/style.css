@@ -479,7 +479,7 @@ table#sheet td.title.statsTitle{
     border: 1px solid;
 }
 
-.transactionDot{
+.subValueDot{
     z-index: 997;
     position: absolute;
     cursor: pointer;

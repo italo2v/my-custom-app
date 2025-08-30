@@ -190,13 +190,13 @@ module.exports = {
         module.exports.updateFootLines()
         if(rowTitle.subValues?.showDot)
           if(cell.subValues.length > 0){
-            if($('td#'+cellID).children('.transactionDot').length === 0)
-              $('<div/>', {'class': 'transactionDot'}).appendTo($('td#' + cellID)).on("click", function () {
+            if($('td#'+cellID).children('.subValueDot').length === 0)
+              $('<div/>', {'class': 'subValueDot'}).appendTo($('td#' + cellID)).on("click", function () {
                 if ($('#ballon.subValues').length === 0)
                   module.exports.openSubValues($(this).parent().attr('id')||'')
               })
           }else
-            $('td#' + cellID).children('.transactionDot').remove()
+            $('td#' + cellID).children('.subValueDot').remove()
       }
     }else
       subValues.onClose = ()=>{cell.subValues = subValues.subValues}
@@ -450,7 +450,7 @@ function insertRow(rowData?: SheetCell[]):void{
       if(typeof rowTitle.subValues === 'object' && rowTitle.subValues.title !== undefined){
         $field.attr('data-subValues', rowTitle.subValues.title)
         if(rowTitle.subValues.showDot && Array.isArray(cell.subValues) && cell.subValues.length > 0)
-          $('<div/>', {'class': 'transactionDot'}).appendTo($field.parent()).on("click", function () {
+          $('<div/>', {'class': 'subValueDot'}).appendTo($field.parent()).on("click", function () {
             if ($('#ballon.subValues').length === 0)
               module.exports.openSubValues($(this).parent().attr('id')||'')
           })

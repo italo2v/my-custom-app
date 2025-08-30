@@ -148,7 +148,7 @@ table#sheet tr.highlight td div.sheetField textarea{
     background-color: #fff65b;
 }
 
-.transactionDot{
+.subValueDot{
     border-color: #4FFFB0;
     background-color: #333;
 }

@@ -82,6 +82,6 @@ table.reportTable tr td.reportTitle{
 #selectors #endMonth, #selectors #startMonth{
     width: 120px;
 }
-.transactionDot, .commentDot{
+.subValueDot, .commentDot{
     top: 32px;
 }

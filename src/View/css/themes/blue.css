@@ -129,7 +129,7 @@ table#sheet tr.highlight td div.sheetField textarea{
     background-color: #fff65b;
 }
 
-.transactionDot{
+.subValueDot{
     border-color: #6faaff;
     background-color: #333;
 }

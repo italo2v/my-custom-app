@@ -84,6 +84,6 @@ a.downloadLink img{
     width: 20px;
     height: 20px;
 }
-.transactionDot, .commentDot{
+.subValueDot, .commentDot{
     top: 21px;
 }
