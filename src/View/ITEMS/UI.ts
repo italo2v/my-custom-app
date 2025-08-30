@@ -235,7 +235,7 @@ module.exports = {
 									if(key !== 'CTRL' && key !== 'ALT' && key !== 'SHIFT'){
 										if(!event.shiftKey && key.length === 1)
 											key = key.toLowerCase()
-										if(event.key === key){
+										if(event.key === key && $('div.panel.mainPanel').length === 0){
 											if(shortKeyItem.dropdown) //@ts-ignore
 							    			$('#'+shortKeyItem.id).children('a').trigger("click").parent().children('ul').children('li').off('keydown.dropdownMenu').on('keydown.dropdownMenu', navigationMenu)
 							    		else

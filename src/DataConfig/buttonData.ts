@@ -3,7 +3,7 @@ module.exports = {
     {type: 'menu', id: 'btnPersonalFinance', title: 'CTRL+P', text: 'personalfinance', items: [
       {id: 'expenses', title: 'CTRL+E', text: 'expenses', menuTitle: 'expenses', panel: 'sheetData'},
       {id: 'revenues', title: 'CTRL+R', text: 'revenues', menuTitle: 'revenues', panel: 'sheetData'},
-      {id: 'cards', title: 'CTRL+C', text: 'cards', menuTitle: 'cards', panel: 'sheetData'}
+      {id: 'cards', title: 'CTRL+D', text: 'cards', menuTitle: 'cards', panel: 'sheetData'}
     ]},
     {type: 'menu', id: 'btnInvestments', title: 'CTRL+I', text: 'investments', items: [
       {id: 'funds', title: 'CTRL+ALT+F', text: 'investmentfunds', menuTitle: 'investmentfunds', panel: 'sheetData'},
@@ -24,7 +24,7 @@ module.exports = {
       {id: 'personalFinance', title: 'CTRL+F', text: 'personalfinance', menuTitle: 'personalfinance', panel: 'reports'},
       {id: 'annualPosition', title: 'CTRL+O', text: 'annualposition', menuTitle: 'annualposition', panel: 'reports'},
       {id: 'yieldReturn', title: 'CTRL+Y', text: 'yield', menuTitle: 'yield', panel: 'reports'},
-      {id: 'incomeEvolution', title: 'CTRL+V', text: 'incomeevolution', menuTitle: 'incomeevolution', panel: 'reports'},
+      {id: 'incomeEvolution', title: 'CTRL+M', text: 'incomeevolution', menuTitle: 'incomeevolution', panel: 'reports'},
     ]}
   ]
 }
