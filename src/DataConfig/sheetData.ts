@@ -293,7 +293,7 @@ module.exports = {
     }
 
     months.forEach( (month: string, m:number)=>{
-      rowTitle.push({title: month, type: 'money', classes: ['varStock'], subValues: subValues, month: m+3})
+      rowTitle.push({title: month, type: 'money', classes: ['varStock'], subValues: subValues, month: m+1})
     })
     return {
     	rowTitle: rowTitle
