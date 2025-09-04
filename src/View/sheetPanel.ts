@@ -309,7 +309,7 @@ function updateYearDataSet(){
 
 function updateRowTitle(year: string){
   module.exports.tabs.sheet.rowTitle.forEach( (title: RowTitle)=>{
-    if(title.type === 'select' && Array.isArray(title.items)){
+    if(title.type === 'select' && typeof title.foreignEntries === 'string'){
       title.items = createSelectItemsEntries(module.exports.selectEntries, year)
     }
   })
