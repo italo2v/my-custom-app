@@ -149,7 +149,7 @@ function createWindow () {
   const mainWindow:any = new BrowserWindow({
     //width: 1920,
     //height: 1080,
-    icon: path.join(__dirname, './icon.png'), //Credits: flaticon.com
+    icon: path.join(__dirname, '../icon.png'), //Credits: flaticon.com
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
