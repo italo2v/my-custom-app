@@ -113,7 +113,7 @@ module.exports = {
       }
     }
     months.forEach(function(title: string, t: number){
-      rowTitle.push({title: title, type: "money", classes: ['optionResult'], readonly: true, subValues: subValues})
+      rowTitle.push({title: title, type: "money", classes: ['optionResult'], readonly: true, subValues: subValues, month: t+1})
     })
     return {rowTitle: rowTitle}
 	},
@@ -198,7 +198,7 @@ module.exports = {
       }
     }
     months.forEach(function(title: string, t: number){
-      rowTitle.push({title: title, type: "money", classes: ['optionResult'], readonly: true, subValues: subValues})
+      rowTitle.push({title: title, type: "money", classes: ['optionResult'], readonly: true, subValues: subValues, month: t+1})
     })
     return {
     	rowTitle: rowTitle,

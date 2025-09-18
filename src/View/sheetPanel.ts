@@ -72,6 +72,7 @@ module.exports = {
     module.exports.tabs.sheet.deleteRowRules = []
     module.exports.tabs.sheet.changeFieldRule = function(field: JQuery, callback: (allow: boolean)=>void){ callback(true) }
     module.exports.tabs.deleteTabRules = []
+    module.exports.tabs.sheet.afterShow = ()=>{}
   },
   showPanel: (dataID: string) => {
     module.exports.dataID = dataID
