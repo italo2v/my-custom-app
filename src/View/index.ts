@@ -11,7 +11,7 @@ var dataSetNames:DataSetNames = {}
 var datalanguage: DataLanguage = []
 var myUser: MyUser
 var systemConfig: ViewSystemConfig
-var version: string = '1.0.0'
+var version: string = '1.0.1'
 
 interface LanguageItem {
   key: string;

@@ -998,9 +998,9 @@ function createBottomStats(){
         module.exports.dataSet.bottomStats.average = stats
       }
       var $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_avg)
-      sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
+      module.exports.sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
       $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_avg)
-      sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
+      module.exports.sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
 
       //$('<td/>', {'class': 'null not'}).appendTo($tr_avg)
       //$('<td/>', {'class': 'null not'}).appendTo($tr_total)
@@ -1011,9 +1011,9 @@ function createBottomStats(){
         module.exports.dataSet.bottomStats.total = stats
       }
       $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_total)
-      sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
+      module.exports.sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
       $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_total)
-      sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
+      module.exports.sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
     }
   }
   if($('table#sheet tr#bottomStats').length === 0 && (module.exports.enableBottomStats !== false || $('table#sheet tr.footLine').length > 0)){
