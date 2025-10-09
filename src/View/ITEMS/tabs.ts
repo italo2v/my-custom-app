@@ -197,7 +197,7 @@ function deleteTab(tabNumber:number){
           if( parseInt($(tab).attr('data-tabNumber')||'') === tabNumber){
             if($(tab).hasClass('active')){
               if(tabNumber === 0)
-                newTab = 0
+                newTab = 1
               else
                 newTab = tabNumber-1
                $('table.sheetTabs a.sheetTab[data-tabNumber="'+newTab+'"]').addClass('active')

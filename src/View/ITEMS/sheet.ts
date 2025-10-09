@@ -423,12 +423,13 @@ function insertRow(rowData?: SheetCell[]):void{
         $(this).parent().parent().parent().removeClass('highlight')
         module.exports.updateDotPosition()
       })
-      $field.children('div.value').off('click').on("click", function(){
+      $field.children('div.value').off('click').on("click", function(e){
         var tr = $(this).parent().parent().parent()
         if(!tr.hasClass('highlight')){
-          $('div.sheetField div.value').each(function(){
-            $(this).parent().parent().parent().removeClass('highlight')
-          })
+          if (!(e.ctrlKey || e.metaKey))
+            $('div.sheetField div.value').each(function(){
+              $(this).parent().parent().parent().removeClass('highlight')
+            })
           tr.addClass('highlight')
         }
         else
@@ -991,24 +992,28 @@ function createBottomStats(){
       }
     }
     if($rightStats.length > 0){
-      var $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_avg)
       stats = statsLine($('tr.bottomStats.average'))
       if(Number.isFinite(stats.average)){
-        delete stats.total
+        //delete stats.total
         module.exports.dataSet.bottomStats.average = stats
       }
-      module.exports.sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
+      var $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_avg)
+      sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
+      $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_avg)
+      sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
 
-      $('<td/>', {'class': 'null not'}).appendTo($tr_avg)
-      $('<td/>', {'class': 'null not'}).appendTo($tr_total)
+      //$('<td/>', {'class': 'null not'}).appendTo($tr_avg)
+      //$('<td/>', {'class': 'null not'}).appendTo($tr_total)
 
-      $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_total)
       stats = statsLine($('tr.bottomStats.total'))
       if(Number.isFinite(stats.total)){
-        delete stats.average
+        //delete stats.average
         module.exports.dataSet.bottomStats.total = stats
       }
-      module.exports.sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
+      $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_total)
+      sheetField.createField(stats.type || 'float', stats.language || '', stats.average || '').appendTo($td).attr('readonly', 'true')
+      $td = $('<td/>', {'class': 'bottomStats rightStats not'}).appendTo($tr_total)
+      sheetField.createField(stats.type || 'float', stats.language || '', stats.total || '').appendTo($td).attr('readonly', 'true')
     }
   }
   if($('table#sheet tr#bottomStats').length === 0 && (module.exports.enableBottomStats !== false || $('table#sheet tr.footLine').length > 0)){

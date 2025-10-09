@@ -24,7 +24,9 @@ module.exports = {
 	      if(first_char !== '*' && first_char !== '/' && first_char !== '+' && first_char !== '-')
 	        return '#!calcerror'
 	    }
-	    var result:number = solveExpression(last[0])
+	    var result:number|string = solveExpression(last[0])
+      if(result === '#!calcerror')
+        return result
 	    value = value.replace('('+last[0]+')', result.toString())
 	  }
 	  value = solveExpression(value).toString()
@@ -32,20 +34,20 @@ module.exports = {
 	}
 }
 
-function solveExpression(exp:string):number{
+function solveExpression(exp:string):number|string{
   var operations: string[] = ['^', '*', '/', '+', '-']
   var operands: string[] = ['']
   var operators: string[] = []
   var o:number
   for(var char:number=0;char<exp.length;char++){
     var op:boolean = false
-    for(o=0;o<operations.length-1;o++){
-      if(exp[char] === operations[o]){
+    for(o=0;o<operations.length;o++){
+      if(exp[char] === operations[o] && exp[char] !== '-' && exp[char] !== '+'){
         operators.push(operations[o])
         op = true
       }
     }
-    if(exp[char] === '-' && exp[char-1] !== undefined && Number.isFinite(parseFloat(exp[char-1]))){
+    if( (exp[char] === '-' || exp[char] === '+') && exp[char-1] !== undefined && Number.isFinite(parseFloat(exp[char-1]))){
       operators.push(exp[char])
       op = true
     }
@@ -55,6 +57,9 @@ function solveExpression(exp:string):number{
     else
       operands[operands.length-1] += exp[char]
   }
+  for(var operand=0;operand<operands.length;operand++)
+    if(!Number.isFinite(parseFloat(operands[operand])))
+      return '#!calcerror'
   var result:number
   while(operators.indexOf('*') !== -1 || operators.indexOf('/') !== -1 || operators.indexOf('^') !== -1){
     for(o=0;o<operators.length;o++){
@@ -64,8 +69,17 @@ function solveExpression(exp:string):number{
         result = parseFloat(operands[o])/parseFloat(operands[o+1])
       else if(operators[o] === '^'){
         result = parseFloat(operands[o])
-        for(var e:number=1;e<=parseInt(operands[o+1])-1;e++)
+        var invert_denominator:boolean
+        var exponent:number = parseInt(operands[o+1])
+        if(exponent < 0){
+          invert_denominator = true
+          exponent = -1*exponent
+        }else
+          invert_denominator = false
+        for(var e:number=1;e<=exponent-1;e++)
           result *= parseFloat(operands[o])
+        if(invert_denominator)
+          result = 1/result
       }
       else
         continue

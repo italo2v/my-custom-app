@@ -151,12 +151,11 @@ function showReportObjects(report:ReportObjects){
 		if(typeof data === 'object')
 			module.exports.yearsTabs = data
 		var selectedData: DataSet = {dataSet:{}}
+		$('#reportTitle.title').html(dataLanguage(report.title))
 		createSelectors(report, undefined, (stack?:{value: boolean})=>{
-			if(report.showSelectors.indexOf('year') !== -1)
-				report.title = dataLanguage(report.title)+' ('+($('#selectYear').val()?.toString()||'')+')'
-			else
-				report.title = dataLanguage(report.title)
-			$('#reportTitle.title').html(report.title)
+			var year = $('#selectYear').val()?.toString()||''
+			if(report.showSelectors.indexOf('year') !== -1 && year !== '')
+				$('#reportTitle.title').html($('#reportTitle.title').html().split(' (')[0]+' ('+year+')')
 			var $startMonth = $('#startMonth')
 			var $endMonth = $("#endMonth")
 			var $selectYear = $('#selectYear')
@@ -202,6 +201,8 @@ function showReportObjects(report:ReportObjects){
 			report.selectorDataSets.groupByPeriod = $('#selectGroupPeriod').val()?.toString() as GroupByPeriod ||''
 			report.selectorDataSets.groupData = $('#selectGroupData').val()?.toString() as GroupByData||report.selectorDataSets.groupData
 			report.selectorDataSets.dataSets.forEach( (dataSet:SelectorDataSets)=>{
+				if(report.showSelectors.indexOf('tabs') === -1 && report.showSelectors.indexOf('datasets/tabs') === -1)
+					dataSet.showTabs = ['{all}']
 				var $dataSet = $('#tabSelectors input[data-type="dataset"][value="'+dataSet.title+'"]')
 				if($dataSet.length > 0)
 					dataSet.showTabs = []
@@ -876,6 +877,8 @@ function showTable(table: ReportTableRow[]){
 		}
 	})
 	$printImage.width( ($($table_html).width()||500) +25)
+	var $reportTitle = $('#reportPanel.mainPanel #reportTitle')
+	showDownload($reportTitle.html(), 'landscape')
 }
 //@ts-ignore
 window.getLastMonth = function(data:Array<SheetCell[]>){

@@ -443,7 +443,7 @@
       "parsedataerror": "An error occurred while reading the data!",
       "getdataerror": "An error occurred while collecting the data!",
       "dataupdated": "The data was successfully updated!",
-      "dataundeleted": "The data was successfully deleted!",
+      "dataundeleted": "An error occurred while deleting the data!",
       "dataset": "Dataset",
       "personalfinance": "Personal Finance",
       "incomes": "Incomes",

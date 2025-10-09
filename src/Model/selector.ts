@@ -171,7 +171,7 @@ module.exports = {
 										row[0]['value'] = selector.title
 									mergedDataTabs = mergeData(mergedDataTabs, selector.collection, years, dateVars, tab, row, row_connection)
 								}
-								if(typeof selector.groupByPeriod === 'string' && selector.groupByPeriod !== '')
+								else if(typeof selector.groupByPeriod === 'string' && selector.groupByPeriod !== '')
 									row = groupDataByPeriod(selector.groupByPeriod, row, dateVars, selector.mergeTabs)
 							}
 							row.forEach( (cell)=>{
@@ -191,6 +191,8 @@ module.exports = {
 					var myData:Array<SheetCell[]> = []
 					var rowTotal: SheetCell[] = [{value: 'total'}]
 					Object.keys(mergedDataTabs).forEach( (row:string)=>{
+		        if(typeof selector.groupByPeriod === 'string' && selector.groupByPeriod !== '')
+		          mergedDataTabs[row] = groupDataByPeriod(selector.groupByPeriod, mergedDataTabs[row], dateVars, selector.mergeTabs)
 						if(selector.showTotal)
 							mergedDataTabs[row].forEach( (cell:SheetCell, i:number)=>{
 								if(typeof rowTotal[i] === 'undefined')
@@ -350,7 +352,7 @@ function filter(filters: SelectorFilter[], removeRows: number[], row: SheetCell[
 					if(!applyFilter(value, filter.condiction, filter.value))
 						removeRows.push(index)
 			}
-		}			
+		}
 	})
 	return removeRows
 }
@@ -662,7 +664,7 @@ function resolveOperations(fieldOperations:FieldOperations[], row:SheetCell[], r
 					if(Array.isArray(field1.field_row))
 					for(var i:number=0;i<=field1.field_row.length-1;i++){
 						field1.value = getValue(field1.field_row[i], field1.varName)
-						if(field2.pos === '*' && Array.isArray(field2.field_row)) 
+						if(field2.pos === '*' && Array.isArray(field2.field_row))
 							field2.value = getValue(field2.field_row[i], field2.varName)
 						if(field1.value !== null && field2.value !== null)
 							applyOperator(field1.value, operation.operator, field2.value, opName, row_result[i])
@@ -689,7 +691,7 @@ function mergeValues(this_cell:SheetCell, this_mergeCell:SheetCell):SheetCell{
 		var stat:boolean = false
 		if(split.length > 1){
 			if(split[1] === 'calc' || split[1] === 'count' || split[1] === 'average')
-				var stat = true 
+				var stat = true
 		}
 		if(field !== '_id' && stat === false)
 			if(Number.isFinite(parseFloat(this_cell[field]))){
@@ -722,7 +724,7 @@ function mergeValues(this_cell:SheetCell, this_mergeCell:SheetCell):SheetCell{
 					var stat:boolean = false
 					if(split.length > 1){
 						if(split[1] === 'calc' || split[1] === 'count' || split[1] === 'average')
-						stat = true 
+						stat = true
 					}
 					if(stat === false){
 						this_cell[field][subField] = parseFloat(this_cell[field][subField])

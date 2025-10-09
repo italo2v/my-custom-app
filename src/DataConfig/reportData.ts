@@ -41,9 +41,9 @@ module.exports = {
 			groupData: 'tabs',
 			showTotal: true,
 			dataSets: [
-				{title: 'variableincome', dataID: 'variableStocks', showTabs: ['{all}']},
-				{title: 'fixedincome', dataID: 'fixedInvestments', showTabs: ['{all}']},
-				{title: 'investmentfunds', dataID: 'funds', showTabs: ['{all}']}
+				{title: 'variableincome', dataID: 'variableStocks'},
+				{title: 'fixedincome', dataID: 'fixedInvestments'},
+				{title: 'investmentfunds', dataID: 'funds'}
 			]
 		}
 	},
@@ -52,9 +52,9 @@ module.exports = {
 			showTotal: true,
 			groupData: 'firstValue',
 			dataSets: [
-				{title: 'variableincome', dataID: 'variableStocks', showTabs: ['{all}']},
-				{title: 'fixedincome', dataID: 'fixedInvestments', showTabs: ['{all}']},
-				{title: 'investmentfunds', dataID: 'funds', showTabs: ['{all}']}
+				{title: 'variableincome', dataID: 'variableStocks'},
+				{title: 'fixedincome', dataID: 'fixedInvestments'},
+				{title: 'investmentfunds', dataID: 'funds'}
 			]
 		}, period: {startDate: '1-{year}', endDate: '1-{year}'}
 	},
