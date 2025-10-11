@@ -215,7 +215,7 @@ function updateSubValuesCell(){
 					var field_value:string = sheetField.getVal($(td).children('div.sheetField'))
 					var number_value:number
 					if(module.exports.fields[index].type === 'float' || module.exports.fields[index].type === 'money'){
-						number_value = parseFloat(parseFloat(field_value).toFixed(2))
+						number_value = parseFloat(parseFloat($(td).children('div.sheetField').attr('data-number')||field_value).toFixed(2))
 						if(!Number.isFinite(number_value))
 							this_subValue[module.exports.fields[index].name] = 0
 						else{
