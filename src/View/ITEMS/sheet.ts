@@ -724,8 +724,8 @@ function sortSheet(cellID: string, invert: boolean){
               return order
             }
             else if (tdA.children('div.sheetField').length > 0) {
-              fieldA = module.exports.sheetField.getVal(tdA.children('div.sheetField'))
-              fieldB = module.exports.sheetField.getVal(tdB.children('div.sheetField'))
+              fieldA = tdA.children('div.sheetField').attr('data-number')||module.exports.sheetField.getVal(tdA.children('div.sheetField'))
+              fieldB = tdB.children('div.sheetField').attr('data-number')||module.exports.sheetField.getVal(tdB.children('div.sheetField'))
             } else if (tdA.children('select').length > 0) {
               fieldA = tdA.children('select').find(":selected").text()
               fieldB = tdB.children('select').find(":selected").text()
@@ -899,8 +899,10 @@ function changeStatsValue(type:FieldType, $td:JQuery, value?:number, last_langua
     if(last_language !== undefined && last_language !== '')
       $field.attr('data-language', last_language)
     module.exports.sheetField.updateType($field, type)
-    if(typeof value === 'number' || typeof value === 'string')
+    if(typeof value === 'number')
       module.exports.sheetField.updateVal($field, value)
+    else
+      module.exports.sheetField.updateVal($field, '')
   }
 }
 

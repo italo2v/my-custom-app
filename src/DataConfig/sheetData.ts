@@ -155,45 +155,47 @@ module.exports = {
       onClose: ()=>{
         var cellID: string = $('#ballon.subValues').attr('data-value') as string
         var cell: OptionCell = sheet.getCellByCellID(cellID)
-        if(typeof cell === 'object' && cell.subValues !== undefined) {
-          cell.value = ''
+        if(typeof cell === 'object'){
+	        cell.value = ''
           delete cell.result
           delete cell.waiting
-          let totalValue: number = 0
-          cell.subValues.forEach( (sv: OptionSubValue) => {
-            if(typeof sv.quantity === 'string')
-              parseInt(sv.quantity)
-            if (Number.isFinite(sv.premium) && Number.isFinite(sv.quantity)) {
-              if (sv.transaction === 'S')
-                totalValue += sv.premium * (sv.quantity as number)
-              else if (sv.transaction === 'B')
-                totalValue -= sv.premium * (sv.quantity as number)
-              if (Number.isFinite(sv.costs))
-                totalValue -= sv.costs
-              cell.value = totalValue
+	        if (cell.subValues !== undefined) {
+	          let totalValue: number = 0
+	          cell.subValues.forEach( (sv: OptionSubValue) => {
+	            if(typeof sv.quantity === 'string')
+	              parseInt(sv.quantity)
+	            if (Number.isFinite(sv.premium) && Number.isFinite(sv.quantity)) {
+	              if (sv.transaction === 'S')
+	                totalValue += sv.premium * (sv.quantity as number)
+	              else if (sv.transaction === 'B')
+	                totalValue -= sv.premium * (sv.quantity as number)
+	              if (Number.isFinite(sv.costs))
+	                totalValue -= sv.costs
+	              cell.value = totalValue
 
-              if (cell.result === undefined)
-                cell.result = 0
-              if (sv.status === 'NEX' || sv.status === 'RES') {
-                if (sv.transaction === 'S')
-                  cell.result += sv.premium * (sv.quantity as number)
-                else if (sv.transaction === 'B')
-                  cell.result -= sv.premium * (sv.quantity as number)
-                if (Number.isFinite(sv.costs))
-                  cell.result -= sv.costs
-              }
-              if (cell.waiting === undefined)
-                cell.waiting = 0
-              if (sv.status === 'WAIT') {
-                if (sv.transaction === 'S')
-                  cell.waiting += sv.premium * (sv.quantity as number)
-                else if (sv.transaction === 'B')
-                  cell.waiting -= sv.premium * (sv.quantity as number)
-                if (Number.isFinite(sv.costs))
-                  cell.waiting -= sv.costs
-              }
-            }
-          })
+	              if (cell.result === undefined)
+	                cell.result = 0
+	              if (sv.status === 'NEX' || sv.status === 'RES') {
+	                if (sv.transaction === 'S')
+	                  cell.result += sv.premium * (sv.quantity as number)
+	                else if (sv.transaction === 'B')
+	                  cell.result -= sv.premium * (sv.quantity as number)
+	                if (Number.isFinite(sv.costs))
+	                  cell.result -= sv.costs
+	              }
+	              if (cell.waiting === undefined)
+	                cell.waiting = 0
+	              if (sv.status === 'WAIT') {
+	                if (sv.transaction === 'S')
+	                  cell.waiting += sv.premium * (sv.quantity as number)
+	                else if (sv.transaction === 'B')
+	                  cell.waiting -= sv.premium * (sv.quantity as number)
+	                if (Number.isFinite(sv.costs))
+	                  cell.waiting -= sv.costs
+	              }
+	            }
+	          })
+					}
         }
       }
     }
